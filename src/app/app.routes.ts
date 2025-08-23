@@ -1,75 +1,25 @@
 import { Routes } from '@angular/router';
 import { TemplatePage } from './pages/template/template-page';
 import { HomePage } from './pages/home/home-page';
-import { SalesPage } from './pages/sales/sales-page';
-import { PurchasesPage } from './pages/purchases/purchases-page';
-import { CollectionsPage } from './pages/collections/collections-page';
-import { PaymentsPage } from './pages/payments/payments-page';
-import { SuppliersPage } from './pages/suppliers/suppliers-page';
-import { CustomersPage } from './pages/customers/customers-page';
-import { ProductionPage } from './pages/production/production-page';
-import { ProductsPage } from './pages/products/products-page';
-import { EmployeesPage } from './pages/employees/employees-page';
-import { CashFlowPage } from './pages/cash-flow/cash-flow-page';
-import { CifPage } from './pages/cif/cif-page';
-import { IngredientsPage } from './pages/ingredients/ingredients-page';
+import { LoginPage } from './pages/auth/login-page/login-page';
+import { RegisterPage } from './pages/auth/register-page/register-page';
 
 export const routes: Routes = [
   {
     path: '',
-  component: TemplatePage,
+    component: TemplatePage,
     children: [
       {
         path: '',
-  component: HomePage,
+        component: HomePage,
       },
       {
-        path: 'sales',
-  component: SalesPage
+        path: 'login',
+        component: LoginPage
       },
       {
-        path: 'purchases',
-  component: PurchasesPage
-      },
-      {
-        path: 'collections',
-  component: CollectionsPage
-      },
-      {
-        path: 'payments',
-  component: PaymentsPage
-      },
-      {
-        path: 'suppliers',
-  component: SuppliersPage
-      },
-      {
-        path: 'customers',
-  component: CustomersPage
-      },
-      {
-        path: 'production',
-  component: ProductionPage
-      },
-      {
-        path: 'supplies',
-  component: IngredientsPage
-      },
-      {
-        path: 'products',
-  component: ProductsPage
-      },
-      {
-        path: 'employees',
-  component: EmployeesPage
-      },
-      {
-        path: 'cash-flow',
-  component: CashFlowPage
-      },
-      {
-        path: 'cif',
-  component: CifPage
+        path: 'register',
+        component: RegisterPage
       }
     ],
   },

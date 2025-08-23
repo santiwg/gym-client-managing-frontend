@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { axiosClient } from './axios-client';
 import { config } from '../config/env';
-import { Unit, UnitDto } from '../interfaces/unit.interface';
+//import { Unit, UnitDto } from '../interfaces/unit.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +12,7 @@ export class UnitService {
   constructor() { }
 
   async getUnits(): Promise<{
-    success: true; data: Unit[]
+    //success: true; data: Unit[]
   } | { success: false; error: string }> {
     try {
       const response = await axiosClient.get(this.baseUrl);
@@ -26,6 +26,7 @@ export class UnitService {
     }
   }
 
+  /*
   async createUnit(unit: UnitDto): Promise<{
     success: true; data: Unit
   } | { success: false; error: string }
@@ -35,9 +36,9 @@ export class UnitService {
         this.baseUrl,
         unit
       );
-
+  
       return { success: true, data: response.data }
-
+  
     } catch (error: any) {
       const message =
         error.response?.data?.message ||  // si existe un mensaje de error que manda el backend lo uso
@@ -61,4 +62,6 @@ export class UnitService {
     }
   }
   // Métodos CRUD aquí
+  
+  */
 }
