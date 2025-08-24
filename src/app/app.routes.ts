@@ -13,14 +13,14 @@ export const routes: Routes = [
         path: '',
         component: HomePage,
       },
-      {
-        path: 'login',
-        component: LoginPage
-      },
-      {
-        path: 'register',
-        component: RegisterPage
-      }
     ],
   },
+  {
+    path: 'login',
+    component: LoginPage,
+  },
+  {
+    path: 'register',
+    component: RegisterPage,
+  }
 ];

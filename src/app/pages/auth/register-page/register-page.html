@@ -1,1 +1,30 @@
-<p>register-page works!</p>
+<div class="auth-container">
+    <div class="form-section">
+        <div class="form-wrapper">
+            <h1>Create an account</h1>
+            <p class="subtitle">Fill in your details to get started.</p>
+
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                <label for="name">Name</label>
+                <input id="name" formControlName="name" placeholder="Enter your name..." />
+
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" placeholder="Enter your email..." />
+
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Enter your password..." />
+
+                <button type="submit" class="btn-register">Register</button>
+            </form>
+
+            <p class="login-link">
+                Already have an account?
+                <a routerLink="/login">Login</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="image-section">
+        <img src="/assets/images/gym-background.jpg" alt="Gym background" />
+    </div>
+</div>
