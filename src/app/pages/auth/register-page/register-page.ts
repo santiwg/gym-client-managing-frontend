@@ -16,7 +16,8 @@ export class RegisterPage {
     this.registerForm = this.fb.group({
       name: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', Validators.required]
+      password: ['', Validators.required],
+      passwordValidation: ['', [Validators.required, Validators.minLength(8)]]
     });
   }
 
@@ -27,4 +28,3 @@ export class RegisterPage {
     }
   }
 }
-
