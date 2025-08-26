@@ -63,6 +63,12 @@ input::placeholder {
     opacity: 1;
 }
 
+input:-webkit-autofill {
+    -webkit-text-fill-color: var(--color-background);
+    transition: background-color 5000s ease-in-out 0s;
+    box-shadow: 0 0 0px 1000px var(--color-surface) inset;
+}
+
 .btn-register {
     margin-top: 4rem;
     padding: 0.75rem;

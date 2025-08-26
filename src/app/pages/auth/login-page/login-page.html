@@ -1,1 +1,27 @@
-<p>login-page works!</p>
+<div class="auth-container">
+    <div class="form-section">
+        <div class="form-wrapper">
+            <h1>Welcome back!</h1>
+            <p class="subtitle">Please enter your details.</p>
+
+            <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                <label for="email">Email</label>
+                <input id="email" formControlName="email" placeholder="Enter your email..." />
+
+                <label for="password">Password</label>
+                <input id="password" type="password" formControlName="password" placeholder="Enter your password..." />
+
+                <button type="submit" class="btn-register">Login</button>
+            </form>
+
+            <p class="login-link">
+                Don't have an account?
+                <a routerLink="/register">Create one</a>
+            </p>
+        </div>
+    </div>
+
+    <div class="image-section">
+        <img src="/assets/images/gym-background.jpg" alt="Gym background" />
+    </div>
+</div>
