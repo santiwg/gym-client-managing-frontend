@@ -3,6 +3,7 @@ import { TemplatePage } from './pages/template/template-page';
 import { HomePage } from './pages/home/home-page';
 import { LoginPage } from './pages/auth/login-page/login-page';
 import { RegisterPage } from './pages/auth/register-page/register-page';
+import { ClientsPage } from './pages/clients/clients-page/clients-page';
 
 export const routes: Routes = [
   {
@@ -12,6 +13,10 @@ export const routes: Routes = [
       {
         path: '',
         component: HomePage,
+      },
+      {
+        path: 'clients',
+        component: ClientsPage,
       },
     ],
   },

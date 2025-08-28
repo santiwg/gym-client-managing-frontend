@@ -37,7 +37,7 @@
     color: var(--color-text-secondary);
 }
 
-.nav-item.active .nav-link {
+.nav-link.active {
     color: var(--color-accent-main);
 }
 
