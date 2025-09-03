@@ -164,8 +164,8 @@ body {
 .dropdown-menu.p-3 {
     background-color: var(--color-text-secondary);
     color: var(--color-background);
-    border-radius: 12px;
-    min-width: 22rem;
+    border-radius: 15px;
+    min-width: 25rem;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
     font-family: var(--font-body);
 }
@@ -174,18 +174,14 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
-    padding: 6px 0;
-    border-bottom: 1px solid rgba(25, 25, 25, 0.07);
-}
-
-.dropdown-row:last-child {
-    border-bottom: none;
+    padding: 4px 0;
 }
 
 .property {
     font-weight: bold;
     color: var(--color-background);
-    min-width: 9rem;
+    min-width: 10.5rem;
+    margin-left: 1rem;
 }
 
 .value {
