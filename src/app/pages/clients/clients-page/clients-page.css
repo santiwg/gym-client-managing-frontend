@@ -150,40 +150,6 @@ body {
     margin-top: 16px;
 }
 
-.client-details-modal {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: var(--color-text-secondary);
-    color: var(--color-background);
-    padding: 32px 24px;
-    border-radius: 12px;
-    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.2);
-    min-width: 350px;
-    z-index: 1000;
-}
-
-.client-details-table {
-    width: 100%;
-    border-collapse: separate;
-    border-spacing: 0 8px;
-}
-
-.client-details-table .field {
-    width: 40%;
-    padding-right: 24px;
-    vertical-align: top;
-    color: var(--color-background);
-    font-weight: bold;
-}
-
-.client-details-table .value {
-    width: 60%;
-    color: var(--color-background);
-    vertical-align: top;
-}
-
 .close-btn {
     position: absolute;
     top: 1rem;
@@ -192,6 +158,71 @@ body {
     font-size: 2rem;
     background-color: var(--color-background);
     cursor: pointer;
+}
+
+/* Estilos para el dropdown de detalles */
+.dropdown-menu.p-3 {
+    background-color: var(--color-text-secondary);
+    color: var(--color-background);
+    border-radius: 12px;
+    min-width: 22rem;
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.15);
+    font-family: var(--font-body);
+}
+
+.dropdown-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    padding: 6px 0;
+    border-bottom: 1px solid rgba(25, 25, 25, 0.07);
+}
+
+.dropdown-row:last-child {
+    border-bottom: none;
+}
+
+.property {
+    font-weight: bold;
+    color: var(--color-background);
+    min-width: 9rem;
+}
+
+.value {
+    color: var(--color-background);
+    word-break: break-word;
+    text-align: left;
+    flex: 1;
+}
+
+/* Ajuste para el botón del dropdown */
+.btn.btn-secondary {
+    background-color: var(--color-accent-main);
+    color: var(--color-background);
+    border-radius: 15px;
+    border: none;
+    padding: 6px 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn.btn-secondary:hover,
+.btn.btn-secondary:focus {
+    background-color: var(--color-text-secondary);
+}
+
+.observations-list {
+    padding-left: 1.2rem;
+    margin: 0;
+}
+
+.observation-item {
+    list-style: disc;
+    color: var(--color-background);
+    margin: 0 0 2px 0;
+    padding: 0;
+    font-size: 1rem;
 }
 
 @media (max-width: 700px) {

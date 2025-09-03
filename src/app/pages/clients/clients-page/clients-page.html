@@ -39,8 +39,62 @@
                     </td>
                     <td>
                         <div class="actions-row">
-                            <button class="see-more-btn" (click)="selectedClient = client; showDetailsModal = true;">See
-                                more</button>
+                            <!-- Dropdown de detalles -->
+                            <div class="dropdown dropend">
+                                <button
+                                    class="btn btn-secondary"
+                                    type="button"
+                                    data-bs-toggle="dropdown"
+                                    aria-expanded="false"
+                                    data-bs-auto-close="outside"
+                                >
+                                    <i class="bi bi-caret-down-fill"></i>Details
+                                </button>
+                                <ul class="dropdown-menu p-3">
+                                    <li class="dropdown-row">
+                                        <span class="property">BirthDate:</span>
+                                        <span class="value">{{ client.birthDate }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Gender:</span>
+                                        <span class="value">{{ client.gender }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Blood-Type:</span>
+                                        <span class="value">{{ client.bloodType }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Email:</span>
+                                        <span class="value">{{ client.email }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Phone Number:</span>
+                                        <span class="value">{{ client.phoneNumber }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Registration Date:</span>
+                                        <span class="value">{{ client.registrationDate }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Client Goal:</span>
+                                        <span class="value">{{ client.goal }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Observations:</span>
+                                        <span class="value">
+                                            @if (Array.isArray(client.observations)) {
+                                                <ul class="observations-list">
+                                                    @for (obs of client.observations) {
+                                                        <li class="observation-item">{{ obs }}</li>
+                                                    }
+                                                </ul>
+                                            } @else {
+                                                {{ client.observations }}
+                                            }
+                                        </span>
+                                    </li>
+                                </ul>
+                            </div>
                             <button class="edit-btn">Edit</button>
                         </div>
                     </td>
@@ -54,43 +108,4 @@
         <button class="page-btn">Previous</button>
         <button class="page-btn">Next</button>
     </div>
-
-    <!-- Modal de detalles del cliente -->
-    @if (showDetailsModal) {
-    <div class="client-details-modal">
-        <button type="button" class="close-btn" aria-label="Close" (click)="showDetailsModal = false"></button>
-        <table class="client-details-table">
-            <tbody>
-                <tr>
-                    <td class="field"><strong>Gender:</strong></td>
-                    <td class="value">{{ selectedClient?.gender }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Blood-Type:</strong></td>
-                    <td class="value">{{ selectedClient?.bloodType }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Email:</strong></td>
-                    <td class="value">{{ selectedClient?.email }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Phone Number:</strong></td>
-                    <td class="value">{{ selectedClient?.phoneNumber }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Registration Date:</strong></td>
-                    <td class="value">{{ selectedClient?.registrationDate }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Client Goal:</strong></td>
-                    <td class="value">{{ selectedClient?.goal }}</td>
-                </tr>
-                <tr>
-                    <td class="field"><strong>Observations:</strong></td>
-                    <td class="value">{{ selectedClient?.observations }}</td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-    }
 </div>

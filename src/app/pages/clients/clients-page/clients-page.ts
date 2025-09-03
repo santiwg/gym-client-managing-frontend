@@ -18,8 +18,9 @@ export class ClientsPage {
       email: 'juan.perez@email.com',
       phoneNumber: '1122334455',
       registrationDate: '2023-01-15',
+      birthDate: '2004-10-10',
       goal: 'Lose weight',
-      observations: 'Prefers morning sessions'
+      observations: ['Prefers morning sessions', 'Allergic to peanuts', 'Vegetarian']
     },
     {
       id: 2,
@@ -31,8 +32,9 @@ export class ClientsPage {
       email: 'brauni@gmail.com',
       phoneNumber: '3531234567',
       registrationDate: '2022-03-23',
+      birthDate: '2018-12-09',
       goal: 'Win muscle',
-      observations: 'Prefers afternoon sessions'
+      observations: ['Prefers afternoon sessions']
     },
     // ...puedes agregar más clientes aquí...
   ];
