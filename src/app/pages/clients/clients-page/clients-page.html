@@ -1,1 +1,96 @@
-<p>clients-page works!</p>
+<div class="clients-page">
+    <div class="header">
+        <h1>Gym Clients</h1>
+        <div class="subtitle-row">
+            <p class="subtitle">View, create and edit clients, and manage their subscriptions.</p>
+            <button class="add-btn">Add</button>
+        </div>
+    </div>
+
+    <div class="table-container">
+        <table class="clients-table">
+            <colgroup>
+                <col style="width: 7%;" /> <!-- ID -->
+                <col style="width: 12%;" /> <!-- Name -->
+                <col style="width: 17%;" /> <!-- Last Name -->
+                <col style="width: 17%;" /> <!-- Document -->
+                <col style="width: 22%;" /> <!-- Subscription -->
+                <col style="width: 20%;" /> <!-- Actions -->
+            </colgroup>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Last Name</th>
+                    <th>Document</th>
+                    <th>Subscription</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @for (client of clients; track client.id) {
+                <tr>
+                    <td>{{ client.id }}</td>
+                    <td>{{ client.name }}</td>
+                    <td>{{ client.lastName }}</td>
+                    <td>{{ client.document }}</td>
+                    <td>
+                        <button class="subscription-btn">Manage subscription</button>
+                    </td>
+                    <td>
+                        <div class="actions-row">
+                            <button class="see-more-btn" (click)="selectedClient = client; showDetailsModal = true;">See
+                                more</button>
+                            <button class="edit-btn">Edit</button>
+                        </div>
+                    </td>
+                </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+    <div class="pagination-row">
+        <button class="page-btn">Previous</button>
+        <button class="page-btn">Next</button>
+    </div>
+
+    <!-- Modal de detalles del cliente -->
+    @if (showDetailsModal) {
+    <div class="client-details-modal">
+        <button type="button" class="close-btn" aria-label="Close" (click)="showDetailsModal = false"></button>
+        <table class="client-details-table">
+            <tbody>
+                <tr>
+                    <td class="field"><strong>Gender:</strong></td>
+                    <td class="value">{{ selectedClient?.gender }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Blood-Type:</strong></td>
+                    <td class="value">{{ selectedClient?.bloodType }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Email:</strong></td>
+                    <td class="value">{{ selectedClient?.email }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Phone Number:</strong></td>
+                    <td class="value">{{ selectedClient?.phoneNumber }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Registration Date:</strong></td>
+                    <td class="value">{{ selectedClient?.registrationDate }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Client Goal:</strong></td>
+                    <td class="value">{{ selectedClient?.goal }}</td>
+                </tr>
+                <tr>
+                    <td class="field"><strong>Observations:</strong></td>
+                    <td class="value">{{ selectedClient?.observations }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    }
+</div>
