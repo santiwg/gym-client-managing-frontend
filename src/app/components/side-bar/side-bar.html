@@ -1,34 +1,56 @@
-<nav class="sidebar">
-    <ul class="nav flex-column">
+<nav class="sidebar" [class.collapsed]="isCollapsed">
+    <div class="sidebar-header">
+        <div class="brand">
+            <img src="assets/icons/dumbbell-icon.svg" alt="Logo" class="logo" />
+            @if (!isCollapsed) {
+            <span class="app-title">Client Manager</span>
+            }
+        </div>
+        <button class="toggle-btn" (click)="toggleSidebar()" aria-label="Toggle sidebar">
+            <i class="fa" [class.fa-chevron-left]="!isCollapsed" [class.fa-chevron-right]="isCollapsed"></i>
+        </button>
+    </div>
+
+    <ul class="nav-list">
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/']" routerLinkActive="active"
                 [routerLinkActiveOptions]="{ exact: true }">
                 <i class="fa fa-home"></i>
+                @if (!isCollapsed) {
                 <span class="label">Home</span>
+                }
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/clients']" routerLinkActive="active">
                 <i class="fa fa-users"></i>
+                @if (!isCollapsed) {
                 <span class="label">Clients</span>
+                }
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/memberships']" routerLinkActive="active">
                 <i class="fa fa-id-card"></i>
+                @if (!isCollapsed) {
                 <span class="label">Memberships</span>
+                }
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/fees']" routerLinkActive="active">
                 <i class="fa fa-credit-card"></i>
+                @if (!isCollapsed) {
                 <span class="label">Fee Collection</span>
+                }
             </a>
         </li>
         <li class="nav-item">
             <a class="nav-link" [routerLink]="['/attendance']" routerLinkActive="active">
                 <i class="fa fa-calendar-check"></i>
+                @if (!isCollapsed) {
                 <span class="label">Attendance</span>
+                }
             </a>
         </li>
     </ul>

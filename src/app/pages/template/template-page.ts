@@ -15,4 +15,11 @@ export class TemplatePage {
   isLoading(): boolean {
     return this.globalStatusService.isLoading();
   }
+
+  isCollapsed = false;
+
+  onSidebarToggle(collapsed: boolean) {
+    this.isCollapsed = collapsed;
+  }
+
 }

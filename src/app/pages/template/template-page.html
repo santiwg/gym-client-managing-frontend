@@ -1,8 +1,9 @@
 <!-- Sidebar fija a la izquierda -->
-<app-side-bar></app-side-bar>
+<app-side-bar (collapsedChange)="onSidebarToggle($event)"></app-side-bar>
 
 <!-- Contenido principal desplazado -->
-<div class="main-content" style="margin-left: 220px;">
+<div class="main-content" [class.collapsed]="isCollapsed">
+
   <!-- Modal de carga -->
   @if(isLoading()){
   <div class="modal fade show d-block" tabindex="-1" role="dialog"
