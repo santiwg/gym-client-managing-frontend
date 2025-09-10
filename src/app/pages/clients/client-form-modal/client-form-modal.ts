@@ -21,13 +21,13 @@ export class ClientFormModal {
   form: FormGroup;
   clientObservations: any[] = [];
 
-  // Observación temporal para agregar/editar
+  // Temporary observation for add/edit
   observationTitle: string = '';
   observationDescription: string = '';
   observationDate: string = '';
   editObservationIndex: number | null = null;
 
-  // Para validación visual
+  // For visual validation
   observationTitleTouched: boolean = false;
   observationDescriptionTouched: boolean = false;
 
@@ -41,10 +41,22 @@ export class ClientFormModal {
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: [''],
       address: [''],
-      birthDate: ['', Validators.required],
+      birthDate: ['', [Validators.required, this.notFutureDateValidator]],
       registrationDate: [''],
       clientGoalId: [null]
     });
+  }
+
+  // Validator to ensure the date is not in the future
+  notFutureDateValidator(control: any) {
+    if (!control.value) return null;
+    // Parse input as YYYY-MM-DD
+    const [year, month, day] = control.value.split('-').map(Number);
+    const birthDate = new Date(year, month - 1, day);
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    // Only allow birth dates less than or equal to today
+    return birthDate > today ? { futureDate: true } : null;
   }
 
   ngOnInit() {
@@ -79,7 +91,7 @@ export class ClientFormModal {
     this.save.emit(clientData);
   }
 
-  // Observaciones
+  // Observations
   addObservation() {
     this.observationTitleTouched = true;
     this.observationDescriptionTouched = true;
@@ -116,6 +128,7 @@ export class ClientFormModal {
     }
   }
 
+  // Clear observation input fields
   clearObservationInputs() {
     this.observationTitle = '';
     this.observationDescription = '';
@@ -124,22 +137,27 @@ export class ClientFormModal {
     this.observationDescriptionTouched = false;
   }
 
+  // Validate that there is at least one observation
   isObservationsValid(): boolean {
     return this.clientObservations.length > 0;
   }
 
+  // Disable add observation button if required fields are empty
   get isAddObservationDisabled(): boolean {
     return !this.observationTitle || !this.observationDescription;
   }
 
+  // Mark title as touched for validation
   onObservationTitleInput() {
     this.observationTitleTouched = true;
   }
 
+  // Mark description as touched for validation
   onObservationDescriptionInput() {
     this.observationDescriptionTouched = true;
   }
 
+  // Cancel editing observation
   cancelEditObservation() {
     this.clearObservationInputs();
     this.editObservationIndex = null;

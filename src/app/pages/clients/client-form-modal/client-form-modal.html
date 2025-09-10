@@ -5,122 +5,122 @@
             <!-- Header -->
             <div class="modal-header modal-accent">
                 <h3 class="modal-title">
-                    {{ isEdit ? 'Editar Cliente' : 'Registrar Cliente' }}
+                    {{ isEdit ? 'Edit Client' : 'Register Client' }}
                 </h3>
                 <button type="button" class="btn-close" (click)="onCancel()" aria-label="Close"></button>
             </div>
             <!-- Body -->
             <div class="modal-body">
                 <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
-                    <!-- Fila 1: nombre - apellido -->
+                    <!-- Row 1: first name - last name -->
                     <div class="row">
                         <div class="col-6">
-                            <label class="form-label">Nombre</label>
+                            <label class="form-label">First Name</label>
                             <input type="text" class="form-control" formControlName="name" />
                             @if (form.get('name')?.invalid && form.get('name')?.touched) {
-                            <p class="text-danger">El nombre es obligatorio.</p>
+                            <p class="text-danger">First name is required.</p>
                             }
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Apellido</label>
+                            <label class="form-label">Last Name</label>
                             <input type="text" class="form-control" formControlName="lastName" />
                             @if (form.get('lastName')?.invalid && form.get('lastName')?.touched) {
-                            <p class="text-danger">El apellido es obligatorio.</p>
+                            <p class="text-danger">Last name is required.</p>
                             }
                         </div>
                     </div>
-                    <!-- Fila 2: género - tipo de sangre -->
+                    <!-- Row 2: gender - blood type -->
                     <div class="row">
                         <div class="col-6">
-                            <label class="form-label">Género</label>
+                            <label class="form-label">Gender</label>
                             <select class="form-select select-arrow" formControlName="genderId">
-                                <option value="" disabled>Seleccionar…</option>
+                                <option value="" disabled>Select…</option>
                                 @for (g of genders; track g.id) {
                                 <option [value]="g.id">{{ g.name }}</option>
                                 }
                             </select>
                             @if (form.get('genderId')?.invalid && form.get('genderId')?.touched) {
-                            <p class="text-danger">Debe seleccionar un género.</p>
+                            <p class="text-danger">Gender is required.</p>
                             }
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Tipo de sangre</label>
+                            <label class="form-label">Blood Type</label>
                             <select class="form-select select-arrow" formControlName="bloodTypeId">
-                                <option value="" disabled>Seleccionar…</option>
+                                <option value="" disabled>Select…</option>
                                 @for (b of bloodTypes; track b.id) {
                                 <option [value]="b.id">{{ b.name }}</option>
                                 }
                             </select>
                             @if (form.get('bloodTypeId')?.invalid && form.get('bloodTypeId')?.touched) {
-                            <p class="text-danger">Debe seleccionar un tipo de sangre.</p>
+                            <p class="text-danger">Blood Type is required.</p>
                             }
                         </div>
                     </div>
-                    <!-- Fila 3: documento - email -->
+                    <!-- Row 3: document - email -->
                     <div class="row">
                         <div class="col-6">
-                            <label class="form-label">Documento</label>
+                            <label class="form-label">Document</label>
                             <input type="text" class="form-control" formControlName="documentNumber" />
                             @if (form.get('documentNumber')?.invalid && form.get('documentNumber')?.touched) {
-                            <p class="text-danger">El documento es obligatorio.</p>
+                            <p class="text-danger">Document is required.</p>
                             }
                         </div>
                         <div class="col-6">
                             <label class="form-label">Email</label>
                             <input type="email" class="form-control" formControlName="email" />
                             @if (form.get('email')?.invalid && form.get('email')?.touched) {
-                            <p class="text-danger">El email es obligatorio.</p>
+                            <p class="text-danger">Email is required.</p>
                             }
                         </div>
                     </div>
-                    <!-- Fila 4: teléfono - dirección -->
+                    <!-- Row 4: phone - address -->
                     <div class="row">
                         <div class="col-6">
-                            <label class="form-label">Teléfono (Opcional)</label>
+                            <label class="form-label">Phone (Optional)</label>
                             <input type="text" class="form-control" formControlName="phoneNumber" />
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Dirección (Opcional)</label>
+                            <label class="form-label">Address (Optional)</label>
                             <input type="text" class="form-control" formControlName="address" />
                         </div>
                     </div>
-                    <!-- Fila 5: fecha de nacimiento - fecha de registro -->
+                    <!-- Row 5: birth date - registration date -->
                     <div class="row">
                         <div class="col-6">
-                            <label class="form-label">Fecha de nacimiento</label>
+                            <label class="form-label">Birth Date</label>
                             <input type="date" class="form-control" formControlName="birthDate" />
                             @if (form.get('birthDate')?.invalid && form.get('birthDate')?.touched) {
-                            <p class="text-danger">La fecha de nacimiento es obligatoria y debe ser válida.</p>
+                            <p class="text-danger">Birth date is required and must be valid.</p>
                             }
                         </div>
                         <div class="col-6">
-                            <label class="form-label">Fecha de registro (Opcional)</label>
+                            <label class="form-label">Registration Date (Optional)</label>
                             <input type="date" class="form-control" formControlName="registrationDate" />
                         </div>
                     </div>
-                    <!-- Fila 6: objetivo -->
+                    <!-- Row 6: client goal -->
                     <div class="row">
                         <div class="col-12">
-                            <label class="form-label">Objetivo (Opcional)</label>
+                            <label class="form-label">Client Goal (Optional)</label>
                             <select class="form-select select-arrow" formControlName="clientGoalId">
-                                <option value="" disabled>Seleccionar…</option>
+                                <option value="" disabled>Select…</option>
                                 @for (goal of clientGoals; track goal.id) {
                                 <option [value]="goal.id">{{ goal.name }}</option>
                                 }
                             </select>
                         </div>
                     </div>
-                    <!-- Sección de gestión de observaciones -->
+                    <!-- Observations management section -->
                     <div>
-                        <h5 id="obs">Observaciones (Opcional)</h5>
+                        <h5 id="obs">Observations (Optional)</h5>
                         <div class="table-responsive">
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th style="width: 25%; text-align: left;">Título</th>
-                                        <th style="width: 35%; text-align: left;">Descripción</th>
-                                        <th style="width: 30%; text-align: left;">Fecha</th>
-                                        <th style="width: 10%; text-align: left;">Acciones</th>
+                                        <th style="width: 25%; text-align: left;">Title</th>
+                                        <th style="width: 35%; text-align: left;">Description</th>
+                                        <th style="width: 30%; text-align: left;">Date</th>
+                                        <th style="width: 10%; text-align: left;">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -148,17 +148,17 @@
                         </div>
                         <div class="obs-row obs-row-full">
                             <div class="col-4">
-                                <label class="form-label">Título</label>
+                                <label class="form-label">Title</label>
                                 <input type="text" class="form-control" [(ngModel)]="observationTitle"
                                     [ngModelOptions]="{standalone: true}" (input)="onObservationTitleInput()" />
                             </div>
                             <div class="col-5">
-                                <label class="form-label">Descripción</label>
+                                <label class="form-label">Description</label>
                                 <input type="text" class="form-control" [(ngModel)]="observationDescription"
                                     [ngModelOptions]="{standalone: true}" (input)="onObservationDescriptionInput()" />
                             </div>
                             <div class="col-3">
-                                <label class="form-label">Fecha</label>
+                                <label class="form-label">Date</label>
                                 <input type="date" class="form-control" [(ngModel)]="observationDate"
                                     [ngModelOptions]="{standalone: true}" />
                             </div>
@@ -182,7 +182,7 @@
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-accent btn-confirm"
                             [disabled]="form.invalid||!isObservationsValid()">
-                            {{ isEdit ? 'Actualizar' : 'Registrar' }}
+                            {{ isEdit ? 'Update' : 'Register' }}
                         </button>
                     </div>
                 </form>
