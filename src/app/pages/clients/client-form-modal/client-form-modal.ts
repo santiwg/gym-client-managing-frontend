@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -9,7 +9,7 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule]
 })
-export class ClientFormModal {
+export class ClientFormModal implements OnInit {
   @Input() isEdit: boolean = false;
   @Input() genders: any[] = [];
   @Input() bloodTypes: any[] = [];
