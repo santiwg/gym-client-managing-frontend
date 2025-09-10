@@ -1,1 +1,192 @@
-<p>client-form-modal works!</p>
+<div class="modal-backdrop"></div>
+<div class="modal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <!-- Header -->
+            <div class="modal-header modal-accent">
+                <h3 class="modal-title">
+                    {{ isEdit ? 'Editar Cliente' : 'Registrar Cliente' }}
+                </h3>
+                <button type="button" class="btn-close" (click)="onCancel()" aria-label="Close"></button>
+            </div>
+            <!-- Body -->
+            <div class="modal-body">
+                <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
+                    <!-- Fila 1: nombre - apellido -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Nombre</label>
+                            <input type="text" class="form-control" formControlName="name" />
+                            @if (form.get('name')?.invalid && form.get('name')?.touched) {
+                            <p class="text-danger">El nombre es obligatorio.</p>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Apellido</label>
+                            <input type="text" class="form-control" formControlName="lastName" />
+                            @if (form.get('lastName')?.invalid && form.get('lastName')?.touched) {
+                            <p class="text-danger">El apellido es obligatorio.</p>
+                            }
+                        </div>
+                    </div>
+                    <!-- Fila 2: género - tipo de sangre -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Género</label>
+                            <select class="form-select select-arrow" formControlName="genderId">
+                                <option value="" disabled>Seleccionar…</option>
+                                @for (g of genders; track g.id) {
+                                <option [value]="g.id">{{ g.name }}</option>
+                                }
+                            </select>
+                            @if (form.get('genderId')?.invalid && form.get('genderId')?.touched) {
+                            <p class="text-danger">Debe seleccionar un género.</p>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Tipo de sangre</label>
+                            <select class="form-select select-arrow" formControlName="bloodTypeId">
+                                <option value="" disabled>Seleccionar…</option>
+                                @for (b of bloodTypes; track b.id) {
+                                <option [value]="b.id">{{ b.name }}</option>
+                                }
+                            </select>
+                            @if (form.get('bloodTypeId')?.invalid && form.get('bloodTypeId')?.touched) {
+                            <p class="text-danger">Debe seleccionar un tipo de sangre.</p>
+                            }
+                        </div>
+                    </div>
+                    <!-- Fila 3: documento - email -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Documento</label>
+                            <input type="text" class="form-control" formControlName="documentNumber" />
+                            @if (form.get('documentNumber')?.invalid && form.get('documentNumber')?.touched) {
+                            <p class="text-danger">El documento es obligatorio.</p>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Email</label>
+                            <input type="email" class="form-control" formControlName="email" />
+                            @if (form.get('email')?.invalid && form.get('email')?.touched) {
+                            <p class="text-danger">El email es obligatorio.</p>
+                            }
+                        </div>
+                    </div>
+                    <!-- Fila 4: teléfono - dirección -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Teléfono (Opcional)</label>
+                            <input type="text" class="form-control" formControlName="phoneNumber" />
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Dirección (Opcional)</label>
+                            <input type="text" class="form-control" formControlName="address" />
+                        </div>
+                    </div>
+                    <!-- Fila 5: fecha de nacimiento - fecha de registro -->
+                    <div class="row">
+                        <div class="col-6">
+                            <label class="form-label">Fecha de nacimiento</label>
+                            <input type="date" class="form-control" formControlName="birthDate" />
+                            @if (form.get('birthDate')?.invalid && form.get('birthDate')?.touched) {
+                            <p class="text-danger">La fecha de nacimiento es obligatoria y debe ser válida.</p>
+                            }
+                        </div>
+                        <div class="col-6">
+                            <label class="form-label">Fecha de registro (Opcional)</label>
+                            <input type="date" class="form-control" formControlName="registrationDate" />
+                        </div>
+                    </div>
+                    <!-- Fila 6: objetivo -->
+                    <div class="row">
+                        <div class="col-12">
+                            <label class="form-label">Objetivo (Opcional)</label>
+                            <select class="form-select select-arrow" formControlName="clientGoalId">
+                                <option value="" disabled>Seleccionar…</option>
+                                @for (goal of clientGoals; track goal.id) {
+                                <option [value]="goal.id">{{ goal.name }}</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <!-- Sección de gestión de observaciones -->
+                    <div>
+                        <h5 id="obs">Observaciones (Opcional)</h5>
+                        <div class="table-responsive">
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 25%; text-align: left;">Título</th>
+                                        <th style="width: 35%; text-align: left;">Descripción</th>
+                                        <th style="width: 30%; text-align: left;">Fecha</th>
+                                        <th style="width: 10%; text-align: left;">Acciones</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (obs of clientObservations; track idx; let idx = $index) {
+                                    <tr>
+                                        <td>{{ obs.title }}</td>
+                                        <td>{{ obs.description }}</td>
+                                        <td>{{ obs.date }}</td>
+                                        <td>
+                                            <div class="obs-actions">
+                                                <button type="button" class="btn btn-sm btn-accent"
+                                                    (click)="editObservation(idx)">
+                                                    <span class="obs-btn-icon">&#9998;</span>
+                                                </button>
+                                                <button type="button" class="btn btn-sm btn-danger"
+                                                    (click)="deleteObservation(idx)">
+                                                    <span class="obs-btn-icon">&#128465;</span>
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="obs-row obs-row-full">
+                            <div class="col-4">
+                                <label class="form-label">Título</label>
+                                <input type="text" class="form-control" [(ngModel)]="observationTitle"
+                                    [ngModelOptions]="{standalone: true}" (input)="onObservationTitleInput()" />
+                            </div>
+                            <div class="col-5">
+                                <label class="form-label">Descripción</label>
+                                <input type="text" class="form-control" [(ngModel)]="observationDescription"
+                                    [ngModelOptions]="{standalone: true}" (input)="onObservationDescriptionInput()" />
+                            </div>
+                            <div class="col-3">
+                                <label class="form-label">Fecha</label>
+                                <input type="date" class="form-control" [(ngModel)]="observationDate"
+                                    [ngModelOptions]="{standalone: true}" />
+                            </div>
+                            <div class="col-btn d-flex obs-btn-group">
+                                <button type="button" class="btn btn-accent" (click)="addObservation()"
+                                    [disabled]="isAddObservationDisabled">
+                                    @if (editObservationIndex !== null) {
+                                    <span class="obs-btn-icon">&#10003;</span> <!-- check -->
+                                    } @else {
+                                    <span class="obs-btn-icon">&#10010;</span> <!-- plus -->
+                                    }
+                                </button>
+                                @if (editObservationIndex !== null) {
+                                <button type="button" class="btn btn-danger" (click)="cancelEditObservation()">
+                                    <span class="obs-btn-icon">&#10006;</span>
+                                </button>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-center">
+                        <button type="submit" class="btn btn-accent btn-confirm"
+                            [disabled]="form.invalid||!isObservationsValid()">
+                            {{ isEdit ? 'Actualizar' : 'Registrar' }}
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

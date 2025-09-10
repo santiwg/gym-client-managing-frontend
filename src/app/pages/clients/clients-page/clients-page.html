@@ -3,7 +3,7 @@
         <h1>Gym Clients</h1>
         <div class="subtitle-row">
             <p class="subtitle">View, create and edit clients, and manage their subscriptions.</p>
-            <button class="add-btn">Add</button>
+            <button class="add-btn" (click)="openClientFormModal()">Add</button>
         </div>
     </div>
 
@@ -80,7 +80,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <button class="edit-btn">Edit</button>
+                            <button class="edit-btn" (click)="editClient(client)">Edit</button>
                         </div>
                     </td>
                 </tr>
@@ -93,4 +93,11 @@
         <button class="page-btn">Previous</button>
         <button class="page-btn">Next</button>
     </div>
+
+    @if (showClientFormModal) {
+    <app-client-form-modal [isEdit]="isEditClient" [genders]="genders" [bloodTypes]="bloodTypes"
+        [clientGoals]="clientGoals" [initialClient]="clientFormInitialData" (close)="closeClientFormModal()"
+        (save)="saveClient($event)">
+    </app-client-form-modal>
+    }
 </div>
