@@ -117,9 +117,9 @@
                             <table class="table table-sm">
                                 <thead>
                                     <tr>
-                                        <th style="width: 25%; text-align: left;">Title</th>
-                                        <th style="width: 35%; text-align: left;">Description</th>
-                                        <th style="width: 30%; text-align: left;">Date</th>
+                                        <th style="width: 30%; text-align: left;">Title</th>
+                                        <th style="width: 45%; text-align: left;">Description</th>
+                                        <th style="width: 21%; text-align: left;">Date</th>
                                         <th style="width: 10%; text-align: left;">Actions</th>
                                     </tr>
                                 </thead>
@@ -132,11 +132,11 @@
                                         <td>
                                             <div class="obs-actions">
                                                 <button type="button" class="btn btn-sm btn-accent"
-                                                    (click)="editObservation(idx)">
+                                                    (click)="editObservation(idx)" title="Edit observation">
                                                     <span class="obs-btn-icon"><i class="fa-solid fa-pen"></i></span>
                                                 </button>
                                                 <button type="button" class="btn btn-sm btn-danger"
-                                                    (click)="deleteObservation(idx)">
+                                                    (click)="deleteObservation(idx)" title="Delete observation">
                                                     <span class="obs-btn-icon"><i class="fa-solid fa-trash"></i></span>
                                                 </button>
                                             </div>
@@ -164,15 +164,17 @@
                             </div>
                             <div class="col-btn d-flex obs-btn-group">
                                 <button type="button" class="btn btn-accent" (click)="addObservation()"
-                                    [disabled]="isAddObservationDisabled">
+                                    [disabled]="isAddObservationDisabled"
+                                    [title]="editObservationIndex !== null ? 'Confirm edit' : 'Add observation'">
                                     @if (editObservationIndex !== null) {
-                                    <span class="obs-btn-icon"><i class="fa-solid fa-check"></i></span> <!-- check -->
+                                    <span class="obs-btn-icon"><i class="fa-solid fa-check"></i></span>
                                     } @else {
-                                    <span class="obs-btn-icon"><i class="fa-solid fa-plus"></i></span> <!-- plus -->
+                                    <span class="obs-btn-icon"><i class="fa-solid fa-plus"></i></span>
                                     }
                                 </button>
                                 @if (editObservationIndex !== null) {
-                                <button type="button" class="btn btn-danger" (click)="cancelEditObservation()">
+                                <button type="button" class="btn btn-danger" (click)="cancelEditObservation()"
+                                    title="Cancel edit">
                                     <span class="obs-btn-icon"><i class="fa-solid fa-xmark"></i></span>
                                 </button>
                                 }
@@ -180,8 +182,7 @@
                         </div>
                     </div>
                     <div class="d-flex justify-content-center">
-                        <button type="submit" class="btn btn-accent btn-confirm"
-                            [disabled]="form.invalid||!isObservationsValid()">
+                        <button type="submit" class="btn btn-accent btn-confirm" [disabled]="form.invalid">
                             {{ isEdit ? 'Update' : 'Register' }}
                         </button>
                     </div>

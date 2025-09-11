@@ -83,7 +83,7 @@ export class ClientFormModal implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid || !this.isObservationsValid()) return;
+    if (this.form.invalid) return;
     const clientData = {
       ...this.form.value,
       clientObservations: this.clientObservations
@@ -135,11 +135,6 @@ export class ClientFormModal implements OnInit {
     this.observationDate = '';
     this.observationTitleTouched = false;
     this.observationDescriptionTouched = false;
-  }
-
-  // Validate that there is at least one observation
-  isObservationsValid(): boolean {
-    return this.clientObservations.length > 0;
   }
 
   // Disable add observation button if required fields are empty

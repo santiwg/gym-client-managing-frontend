@@ -99,6 +99,11 @@
     justify-content: center;
 }
 
+.btn-close:focus {
+    outline: none;
+    box-shadow: none;
+}
+
 .btn-close::before {
     content: '\00d7';
     font-size: 2rem;
@@ -108,15 +113,16 @@
 
 .btn-accent {
     background-color: var(--color-accent-main);
+    border: 1px solid var(--color-accent-main);
     color: var(--color-background);
     border-radius: 15px;
-    border: none;
     transition: background 0.2s;
-    padding: 8px 18px;
+    padding: 8px 15px;
 }
 
 .btn-accent:hover {
     background: var(--color-accent-alt3);
+    border: 1px solid var(--color-accent-alt3);
 }
 
 .btn-danger {
@@ -124,7 +130,7 @@
     background: transparent;
     border-radius: 15px;
     border: 1px solid var(--color-background);
-    padding: 8px 18px;
+    padding: 8px 15px;
 }
 
 .btn-danger:hover {
@@ -142,9 +148,10 @@
 
 .table th,
 .table td {
+    background-color: var(--color-surface);
     padding: 8px 10px;
     color: var(--color-background);
-    border-bottom: 1px solid var(--color-surface);
+    border-bottom: 1px solid var(--color-text-secondary);
 }
 
 .table th {
@@ -241,7 +248,7 @@
 .obs-row-full {
     width: 100%;
     display: flex;
-    gap: 0.7rem;
+    gap: 0.45rem;
     align-items: flex-end;
 }
 
@@ -283,8 +290,15 @@
     flex-basis: 20%;
 }
 
+.obs-row-full>.col-4,
+.obs-row-full>.col-5,
+.obs-row-full>.col-3 {
+    flex: 1 1 0;
+    min-width: 0;
+}
+
 .obs-row-full>.col-btn {
-    flex-basis: 20%;
+    flex: 0 0 auto;
     display: flex;
     align-items: flex-end;
     justify-content: flex-end;
@@ -292,7 +306,6 @@
 
 .obs-actions {
     display: flex;
-    gap: 0.5rem;
     justify-content: center;
     align-items: center;
 }
@@ -303,8 +316,8 @@
 }
 
 .btn-confirm {
-    margin-top: 20px;
-    margin-bottom: 5px;
+    margin-top: 25px;
+    margin-bottom: 10px;
     width: 100%;
     font-weight: bold;
 }
@@ -355,7 +368,7 @@
 }
 
 .obs-btn-group {
-    gap: 0.5rem;
+    gap: 0.rem;
     justify-content: flex-end;
     align-items: flex-end;
 }
