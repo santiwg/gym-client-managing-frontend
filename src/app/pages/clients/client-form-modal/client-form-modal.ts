@@ -42,7 +42,7 @@ export class ClientFormModal implements OnInit {
       phoneNumber: [''],
       address: [''],
       birthDate: ['', [Validators.required, this.notFutureDateValidator]],
-      registrationDate: [''],
+      registrationDate: ['', this.notFutureDateValidator],
       clientGoalId: [null]
     });
   }
@@ -97,6 +97,13 @@ export class ClientFormModal implements OnInit {
     this.observationDescriptionTouched = true;
     if (!this.observationTitle || !this.observationDescription) return;
 
+    // Validate observation date if it exists
+    let observationDateError = null;
+    if (this.observationDate) {
+      observationDateError = this.notFutureDateValidator({ value: this.observationDate });
+      if (observationDateError) return;
+    }
+
     const obs = {
       title: this.observationTitle,
       description: this.observationDescription,
@@ -139,7 +146,7 @@ export class ClientFormModal implements OnInit {
 
   // Disable add observation button if required fields are empty
   get isAddObservationDisabled(): boolean {
-    return !this.observationTitle || !this.observationDescription;
+    return !this.observationTitle || !this.observationDescription || !!this.observationDateError;
   }
 
   // Mark title as touched for validation
@@ -156,5 +163,10 @@ export class ClientFormModal implements OnInit {
   cancelEditObservation() {
     this.clearObservationInputs();
     this.editObservationIndex = null;
+  }
+
+  get observationDateError() {
+    if (!this.observationDate) return null;
+    return this.notFutureDateValidator({ value: this.observationDate });
   }
 }

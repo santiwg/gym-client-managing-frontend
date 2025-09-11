@@ -192,7 +192,6 @@
 
 .row {
     display: flex;
-    gap: 0.5rem;
     margin-bottom: 1.2rem;
 }
 
@@ -241,7 +240,6 @@
     display: flex;
     gap: 0.7rem;
     align-items: flex-end;
-    margin-bottom: 1rem;
     width: 100%;
 }
 
@@ -316,7 +314,7 @@
 }
 
 .btn-confirm {
-    margin-top: 25px;
+    margin-top: 40px;
     margin-bottom: 10px;
     width: 100%;
     font-weight: bold;
@@ -368,9 +366,12 @@
 }
 
 .obs-btn-group {
-    gap: 0.rem;
     justify-content: flex-end;
     align-items: flex-end;
+}
+
+.obs-row-full+.text-danger {
+    margin-bottom: 0rem;
 }
 
 @media (max-width: 700px) {

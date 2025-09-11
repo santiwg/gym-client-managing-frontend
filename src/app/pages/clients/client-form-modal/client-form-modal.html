@@ -96,6 +96,9 @@
                         <div class="col-6">
                             <label class="form-label">Registration Date (Optional)</label>
                             <input type="date" class="form-control" formControlName="registrationDate" />
+                            @if (form.get('registrationDate')?.invalid && form.get('registrationDate')?.touched) {
+                            <p class="text-danger">Registration date cannot be in the future.</p>
+                            }
                         </div>
                     </div>
                     <!-- Row 6: client goal -->
@@ -180,6 +183,9 @@
                                 }
                             </div>
                         </div>
+                        @if (observationDateError) {
+                        <p class="text-danger">Observation date cannot be in the future.</p>
+                        }
                     </div>
                     <div class="d-flex justify-content-center">
                         <button type="submit" class="btn btn-accent btn-confirm" [disabled]="form.invalid">
