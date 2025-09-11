@@ -29,6 +29,9 @@ body {
   --color-accent-alt2: #FDEE21;
   --color-accent-alt3: #FFDE59;
 
+  /* Error */
+  --color-danger: #E74C3C;
+
   /* Typography */
   --font-title: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   --font-body: 'Lato', sans-serif;
@@ -42,7 +45,6 @@ h4,
 h5,
 h6 {
   font-family: var(--font-title);
-  color: var(--color-text-primary);
   margin: 0;
 }
 
