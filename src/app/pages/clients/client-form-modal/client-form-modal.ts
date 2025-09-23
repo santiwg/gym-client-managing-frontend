@@ -86,6 +86,7 @@ export class ClientFormModal implements OnInit {
     if (this.form.invalid) return;
     const clientData = {
       ...this.form.value,
+      registrationDate: this.form.value.registrationDate ? this.form.value.registrationDate : null,
       clientObservations: this.clientObservations
     };
     this.save.emit(clientData);
@@ -107,7 +108,7 @@ export class ClientFormModal implements OnInit {
     const obs = {
       title: this.observationTitle,
       description: this.observationDescription,
-      date: this.observationDate || new Date().toISOString().substring(0, 10)
+      date: this.observationDate ? this.observationDate : null
     };
 
     if (this.editObservationIndex !== null) {
