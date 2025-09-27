@@ -158,27 +158,31 @@ export class ClientsPage implements OnInit {
     this.clientFormInitialData = null;
   }
 
-  getGenderName(id: number | undefined | null): string {
-    if (!id) return '-';
-    const g = this.genders.find(g => g.id === id);
-    return g ? g.name : '-';
+  // Ahora el backend devuelve objetos completos, no solo IDs
+  getGenderName(gender: any): string {
+    return gender?.name || '-';
   }
 
-  getBloodTypeName(id: number | undefined | null): string {
-    if (!id) return '-';
-    const b = this.bloodTypes.find(b => b.id === id);
-    return b ? b.name : '-';
+  getBloodTypeName(bloodType: any): string {
+    return bloodType?.name || '-';
   }
 
-  getGoalName(id: number | undefined | null): string {
-    if (!id) return '-';
-    const goal = this.clientGoals.find(goal => goal.id === id);
-    return goal ? goal.name : '-';
+  getGoalName(clientGoal: any): string {
+    return clientGoal?.name || '-';
   }
 
   getObservationsDisplay(observations: any[] | undefined): string {
     if (!observations || !observations.length) return '';
-    return observations.map(o => (typeof o === 'object' && o.title ? o.title : o)).join(', ');
+    return observations.map(o => {
+      if (typeof o === 'object') {
+        // Los campos de la entidad ClientObservation son 'summary' y 'comment'
+        const parts = [];
+        if (o.summary) parts.push(o.summary);
+        if (o.comment) parts.push(`(${o.comment})`);
+        return parts.join(' ');
+      }
+      return o.toString();
+    }).join('; ');
   }
 
   // Métodos de paginación
