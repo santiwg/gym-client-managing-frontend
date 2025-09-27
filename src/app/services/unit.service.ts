@@ -7,15 +7,17 @@ import { config } from '../config/env';
   providedIn: 'root'
 })
 export class UnitService {
-  private baseUrl = config.urls.unit;
+  // Este servicio no corresponde a ningún endpoint del backend actual
+  // Comentado hasta que se implemente en el backend
 
   constructor() { }
 
+  /*
   async getUnits(): Promise<{
     //success: true; data: Unit[]
   } | { success: false; error: string }> {
     try {
-      const response = await axiosClient.get(this.baseUrl);
+      const response = await axiosClient.get('/units'); // endpoint no existe
       return { success: true, data: response.data };
     } catch (error: any) {
       const message =
@@ -25,8 +27,6 @@ export class UnitService {
       return { success: false, error: message };
     }
   }
-
-  /*
   async createUnit(unit: UnitDto): Promise<{
     success: true; data: Unit
   } | { success: false; error: string }

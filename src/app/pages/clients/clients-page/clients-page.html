@@ -33,7 +33,7 @@
                     <td>{{ client.id }}</td>
                     <td>{{ client.name }}</td>
                     <td>{{ client.lastName }}</td>
-                    <td>{{ client.document }}</td>
+                    <td>{{ client.documentNumber }}</td>
                     <td>
                         <button class="subscription-btn">Manage subscription</button>
                     </td>
@@ -52,11 +52,11 @@
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Gender:</span>
-                                        <span class="value">{{ client.gender }}</span>
+                                        <span class="value">{{ getGenderName(client.genderId) }}</span>
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Blood-Type:</span>
-                                        <span class="value">{{ client.bloodType }}</span>
+                                        <span class="value">{{ getBloodTypeName(client.bloodTypeId) }}</span>
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Email:</span>
@@ -72,11 +72,11 @@
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Client Goal:</span>
-                                        <span class="value">{{ client.goal }}</span>
+                                        <span class="value">{{ getGoalName(client.clientGoalId) }}</span>
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Observations:</span>
-                                        <span class="value">{{ client.observations }}</span>
+                                        <span class="value">{{ getObservationsDisplay(client.observations) }}</span>
                                     </li>
                                 </ul>
                             </div>
@@ -90,8 +90,8 @@
     </div>
 
     <div class="pagination-row">
-        <button class="page-btn">Previous</button>
-        <button class="page-btn">Next</button>
+        <app-pagination [page]="currentPage" [hasNext]="hasNext" (previous)="onPrevious()" (next)="onNext()">
+        </app-pagination>
     </div>
 
     @if (showClientFormModal) {

@@ -1,13 +1,27 @@
-export const config= {
+export const config = {
+  api: {
+    baseUrl: 'http://localhost:3000',
+    timeout: 10000,
+  },
   urls: {
-    cif: 'http://localhost:3000/cifs',
-    employees: 'http://localhost:3000/employees',
-    products: 'http://localhost:3000/products',
-    employeeRoles: 'http://localhost:3000/employee-roles',
-    costTypes: 'http://localhost:3000/cost-types',
-    ingredients: 'http://localhost:3000/ingredients',
-    unit: 'http://localhost:3000/units',
-    stockMovements: 'http://localhost:3000/stock-movements',
+    // Autenticación
+    auth: {
+      login: '/users/login',
+      register: '/users/register',
+      refresh: '/users/refresh-token',
+      me: '/users/me',
+      canDo: '/users/can-do'
+    },
+    // Clientes
+    clients: '/client',
+    // Membresías
+    memberships: '/membership',
+    // Roles y permisos
+    roles: '/roles',
+    permissions: '/permissions',
+    // Datos comunes
+    states: '/state',
+    genders: '/gender',
+    bloodTypes: '/blood-type',
   },
 };
- //CAMBIAR

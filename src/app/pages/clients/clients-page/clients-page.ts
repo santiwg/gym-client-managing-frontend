@@ -1,66 +1,98 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { ClientFormModal } from "../client-form-modal/client-form-modal";
+import { ClientService } from '../../../services/client.service';
+import { CommonDataService } from '../../../services/common-data.service';
+import { Client, Gender, BloodType } from '../../../interfaces/client.interface';
+import { Pagination } from '../../../components/pagination/pagination';
 
 @Component({
   selector: 'app-clients-page',
-  imports: [ClientFormModal],
+  imports: [ClientFormModal, CommonModule, Pagination],
   templateUrl: './clients-page.html',
   styleUrl: './clients-page.css'
 })
-export class ClientsPage {
-  genders = [
-    { id: 1, name: 'Male' },
-    { id: 2, name: 'Female' },
-    { id: 3, name: 'Prefer not to say' }
-  ];
-  bloodTypes = [
-    { id: 1, name: 'O+' },
-    { id: 2, name: 'A+' },
-    // ...otros tipos...
-  ];
-  clientGoals = [
-    { id: 1, name: 'Lose weight' },
-    { id: 2, name: 'Win muscle' },
-    // ...otros objetivos...
-  ];
+export class ClientsPage implements OnInit {
 
-  clients = [
-    {
-      id: 1,
-      name: 'Juan',
-      lastName: 'Pérez',
-      document: '12345678',
-      gender: 'Male',
-      bloodType: 'O+',
-      email: 'juan.perez@email.com',
-      phoneNumber: '1122334455',
-      registrationDate: '2023-01-15',
-      birthDate: '2004-10-10',
-      goal: 'Lose weight',
-      observations: ['Prefers morning sessions', 'Allergic to peanuts', 'Vegetarian']
-    },
-    {
-      id: 2,
-      name: 'Mateo',
-      lastName: 'Briolo',
-      document: '46882993',
-      gender: 'Prefer not to say',
-      bloodType: 'O+',
-      email: 'brauni@gmail.com',
-      phoneNumber: '3531234567',
-      registrationDate: '2022-03-23',
-      birthDate: '2018-12-09',
-      goal: 'Win muscle',
-      observations: ['Prefers afternoon sessions']
-    },
-    // ...puedes agregar más clientes aquí...
-  ];
+  // Propiedades del componente
+  clients: Client[] = [];
+  genders: Gender[] = [];
+  bloodTypes: BloodType[] = [];
+  clientGoals: any[] = [];
 
+  // Estados de la UI
   showDetailsModal = false;
-  selectedClient: any = null;
+  selectedClient: Client | null = null;
   showClientFormModal = false;
   clientFormInitialData: any = null;
   isEditClient: boolean = false;
+
+  // Estados de carga
+  isLoading = false;
+  error: string | null = null;
+
+  // Propiedades de paginación (el backend maneja la cantidad por defecto = 10)
+  currentPage = 1;
+  hasNext = false;
+
+  constructor(
+    private clientService: ClientService,
+    private commonDataService: CommonDataService
+  ) { }
+
+  ngOnInit() {
+    this.loadInitialData();
+  }
+
+  private loadInitialData() {
+    this.loadClients();
+    this.loadGenders();
+    this.loadBloodTypes();
+    this.loadClientGoals();
+  }
+
+  loadClients() {
+    this.isLoading = true;
+    this.error = null;
+
+    this.clientService.getClients({
+      page: this.currentPage
+      // No enviamos quantity, el backend usa el default (10)
+    }).subscribe({
+      next: (response) => {
+        this.clients = response.data;
+        this.hasNext = response.hasMore; // El backend maneja esto
+        this.isLoading = false;
+      },
+      error: (error) => {
+        console.error('Error loading clients:', error);
+        this.error = 'Error al cargar los clientes';
+        this.isLoading = false;
+      }
+    });
+  }
+
+  async loadGenders() {
+    try {
+      this.genders = await this.commonDataService.getGenders();
+    } catch (error) {
+      console.error('Error loading genders:', error);
+    }
+  }
+
+  async loadBloodTypes() {
+    try {
+      this.bloodTypes = await this.commonDataService.getBloodTypes();
+    } catch (error) {
+      console.error('Error loading blood types:', error);
+    }
+  }
+
+  loadClientGoals() {
+    // Este método se puede implementar cuando tengas el endpoint en el backend
+    // Por ahora dejamos un array vacío
+    this.clientGoals = [];
+  }
 
   openClientFormModal() {
     this.clientFormInitialData = null;
@@ -71,6 +103,10 @@ export class ClientsPage {
   editClient(client: any) {
     this.clientFormInitialData = {
       ...client,
+      genderId: client.genderId,
+      bloodTypeId: client.bloodTypeId,
+      clientGoalId: client.clientGoalId,
+      documentNumber: client.documentNumber,
       clientObservations: Array.isArray(client.observations)
         ? client.observations.map((obs: string | { title: string; description: string; date: string }) =>
           typeof obs === 'object'
@@ -79,6 +115,7 @@ export class ClientsPage {
         )
         : []
     };
+
     this.isEditClient = true;
     this.showClientFormModal = true;
   }
@@ -88,24 +125,72 @@ export class ClientsPage {
   }
 
   saveClient(clientData: any) {
+    const mappedClient: Client = {
+      id: this.isEditClient && this.clientFormInitialData ? this.clientFormInitialData.id : this.clients.length + 1,
+      name: clientData.name,
+      lastName: clientData.lastName,
+      documentNumber: clientData.documentNumber,
+      genderId: clientData.genderId ?? null,
+      bloodTypeId: clientData.bloodTypeId ?? null,
+      email: clientData.email,
+      phoneNumber: clientData.phoneNumber,
+      registrationDate: clientData.registrationDate,
+      birthDate: clientData.birthDate,
+      clientGoalId: clientData.clientGoalId ?? null,
+      observations: clientData.clientObservations ?? []
+    };
+
     if (this.isEditClient && this.clientFormInitialData) {
       const idx = this.clients.findIndex(c => c.id === this.clientFormInitialData.id);
       if (idx !== -1) {
-        this.clients[idx] = {
-          ...this.clients[idx],
-          ...clientData,
-          observations: clientData.clientObservations ?? []
-        };
+        this.clients[idx] = mappedClient;
       }
+
     } else {
-      this.clients.push({
-        id: this.clients.length + 1,
-        ...clientData,
-        observations: clientData.clientObservations ?? []
-      });
+      this.clients.push(mappedClient);
     }
+
     this.showClientFormModal = false;
     this.isEditClient = false;
     this.clientFormInitialData = null;
   }
+
+  getGenderName(id: number | undefined | null): string {
+    if (!id) return '-';
+    const g = this.genders.find(g => g.id === id);
+    return g ? g.name : '-';
+  }
+
+  getBloodTypeName(id: number | undefined | null): string {
+    if (!id) return '-';
+    const b = this.bloodTypes.find(b => b.id === id);
+    return b ? b.name : '-';
+  }
+
+  getGoalName(id: number | undefined | null): string {
+    if (!id) return '-';
+    const goal = this.clientGoals.find(goal => goal.id === id);
+    return goal ? goal.name : '-';
+  }
+
+  getObservationsDisplay(observations: any[] | undefined): string {
+    if (!observations || !observations.length) return '';
+    return observations.map(o => (typeof o === 'object' && o.title ? o.title : o)).join(', ');
+  }
+
+  // Métodos de paginación
+  onPrevious() {
+    if (this.currentPage > 1) {
+      this.currentPage--;
+      this.loadClients();
+    }
+  }
+
+  onNext() {
+    if (this.hasNext) {
+      this.currentPage++;
+      this.loadClients();
+    }
+  }
+
 }
