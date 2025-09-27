@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { axiosClient } from './axios-client';
 import { config } from '../config/env';
-import { Gender, BloodType, Membership } from '../interfaces/client.interface';
+import { Gender, BloodType, Membership, ClientGoal } from '../interfaces/client.interface';
 import { State } from '../interfaces/common.interface';
 
 @Injectable({
@@ -111,4 +111,16 @@ export class CommonDataService {
             throw new Error('Error al eliminar membresía');
         }
     }
+
+    // Objetivos de cliente
+    async getClientGoals(): Promise<ClientGoal[]> {
+        try {
+            const response = await axiosClient.get(config.urls.clientGoals);
+            return response.data;
+        } catch (error: any) {
+            console.error('Get client goals error:', error);
+            throw new Error('Error al obtener objetivos de cliente');
+        }
+    }
+
 }

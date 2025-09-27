@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ClientFormModal } from "../client-form-modal/client-form-modal";
 import { ClientService } from '../../../services/client.service';
 import { CommonDataService } from '../../../services/common-data.service';
-import { Client, Gender, BloodType } from '../../../interfaces/client.interface';
+import { Client, Gender, BloodType, ClientGoal } from '../../../interfaces/client.interface';
 import { Pagination } from '../../../components/pagination/pagination';
 
 @Component({
@@ -18,7 +18,7 @@ export class ClientsPage implements OnInit {
   clients: Client[] = [];
   genders: Gender[] = [];
   bloodTypes: BloodType[] = [];
-  clientGoals: any[] = [];
+  clientGoals: ClientGoal[] = [];
 
   // Estados de la UI
   showDetailsModal = false;
@@ -88,10 +88,13 @@ export class ClientsPage implements OnInit {
     }
   }
 
-  loadClientGoals() {
-    // Este método se puede implementar cuando tengas el endpoint en el backend
-    // Por ahora dejamos un array vacío
-    this.clientGoals = [];
+  async loadClientGoals() {
+    try {
+      this.clientGoals = await this.commonDataService.getClientGoals();
+    } catch (error) {
+      console.error('Error loading client goals:', error);
+      this.clientGoals = [];
+    }
   }
 
   openClientFormModal() {

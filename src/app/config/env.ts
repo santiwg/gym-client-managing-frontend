@@ -23,5 +23,6 @@ export const config = {
     states: '/state',
     genders: '/gender',
     bloodTypes: '/blood-type',
+    clientGoals: '/client-goals',
   },
 };
