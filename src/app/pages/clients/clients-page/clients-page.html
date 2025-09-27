@@ -64,7 +64,11 @@
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Phone Number:</span>
-                                        <span class="value">{{ client.phoneNumber }}</span>
+                                        <span class="value">{{ client.phoneNumber || '-' }}</span>
+                                    </li>
+                                    <li class="dropdown-row">
+                                        <span class="property">Address:</span>
+                                        <span class="value">{{ client.address || '-' }}</span>
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Registration Date:</span>
@@ -72,11 +76,12 @@
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Client Goal:</span>
-                                        <span class="value">{{ getGoalName(client.clientGoal) }}</span>
+                                        <span class="value">{{ getGoalName(client.clientGoal) || '-' }}</span>
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Observations:</span>
-                                        <span class="value">{{ getObservationsDisplay(client.observations) }}</span>
+                                        <span class="value">{{ getObservationsDisplay(client.observations) || '-'
+                                            }}</span>
                                     </li>
                                 </ul>
                             </div>

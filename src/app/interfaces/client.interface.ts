@@ -56,6 +56,7 @@ export interface Client {
     documentNumber: string;
     email: string;
     phoneNumber?: string;
+    address?: string;
     birthDate: Date;
     registrationDate: Date;
 
@@ -81,6 +82,7 @@ export interface CreateClientRequest {
     documentNumber: string;
     email: string;
     phoneNumber?: string;
+    address?: string;
     birthDate: Date;
     registrationDate?: Date;
     clientGoalId?: number;
