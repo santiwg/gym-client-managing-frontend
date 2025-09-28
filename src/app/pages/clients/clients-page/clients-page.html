@@ -80,8 +80,8 @@
                                     </li>
                                     <li class="dropdown-row">
                                         <span class="property">Observations:</span>
-                                        <span class="value">{{ getObservationsDisplay(client.observations) || '-'
-                                            }}</span>
+                                        <span class="value"
+                                            [innerHTML]="getObservationsDisplay(client.observations) || '-'"></span>
                                     </li>
                                 </ul>
                             </div>

@@ -177,12 +177,12 @@ export class ClientsPage implements OnInit {
       if (typeof o === 'object') {
         // Los campos de la entidad ClientObservation son 'summary' y 'comment'
         const parts = [];
-        if (o.summary) parts.push(o.summary);
-        if (o.comment) parts.push(`(${o.comment})`);
-        return parts.join(' ');
+        if (o.summary) parts.push(`<strong>${o.summary}</strong>`);
+        if (o.comment) parts.push(`${o.comment}`);
+        return parts.join(': ');
       }
       return o.toString();
-    }).join('; ');
+    }).join('<br>');
   }
 
   // Métodos de paginación
