@@ -30,9 +30,7 @@ export interface CreateClientRequest {
     emergencyPhone?: string;
 }
 
-export interface UpdateClientRequest extends Partial<CreateClientRequest> {
-    id: number;
-}
+export interface UpdateClientRequest extends Partial<CreateClientRequest> { }
 
 // Interfaces para membresías
 export interface Membership {

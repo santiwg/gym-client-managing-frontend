@@ -127,35 +127,72 @@ export class ClientsPage implements OnInit {
     this.showClientFormModal = false;
   }
 
-  saveClient(clientData: any) {
-    const mappedClient: Client = {
-      id: this.isEditClient && this.clientFormInitialData ? this.clientFormInitialData.id : this.clients.length + 1,
-      name: clientData.name,
-      lastName: clientData.lastName,
-      documentNumber: clientData.documentNumber,
-      genderId: clientData.genderId ?? null,
-      bloodTypeId: clientData.bloodTypeId ?? null,
-      email: clientData.email,
-      phoneNumber: clientData.phoneNumber,
-      registrationDate: clientData.registrationDate,
-      birthDate: clientData.birthDate,
-      clientGoalId: clientData.clientGoalId ?? null,
-      observations: clientData.clientObservations ?? []
-    };
+  async saveClient(clientData: any) {
+    try {
+      this.isLoading = true;
+      this.error = null;
 
-    if (this.isEditClient && this.clientFormInitialData) {
-      const idx = this.clients.findIndex(c => c.id === this.clientFormInitialData.id);
-      if (idx !== -1) {
-        this.clients[idx] = mappedClient;
+      // Mapear las observaciones al formato que espera el backend
+      const clientObservations = Array.isArray(clientData.clientObservations)
+        ? clientData.clientObservations.map((obs: any) => ({
+          summary: obs.title || obs.summary || '',
+          comment: obs.description || obs.comment || '',
+          date: obs.date || new Date().toISOString().split('T')[0]
+        }))
+        : [];
+
+      // Validar campos requeridos antes de crear el request
+      const genderIdNum = parseInt(clientData.genderId, 10);
+      const bloodTypeIdNum = parseInt(clientData.bloodTypeId, 10);
+
+      if (!genderIdNum || genderIdNum <= 0 || isNaN(genderIdNum)) {
+        throw new Error('El género es requerido');
+      }
+      if (!bloodTypeIdNum || bloodTypeIdNum <= 0 || isNaN(bloodTypeIdNum)) {
+        throw new Error('El tipo de sangre es requerido');
       }
 
-    } else {
-      this.clients.push(mappedClient);
-    }
+      const clientRequest = {
+        name: clientData.name,
+        lastName: clientData.lastName,
+        documentNumber: clientData.documentNumber,
+        email: clientData.email,
+        phoneNumber: clientData.phoneNumber || undefined,
+        address: clientData.address || undefined,
+        birthDate: clientData.birthDate,
+        // Solo enviar registrationDate si se proporcionó, sino dejar que el backend use su fecha por defecto
+        ...(clientData.registrationDate && { registrationDate: clientData.registrationDate }),
+        genderId: genderIdNum,
+        bloodTypeId: bloodTypeIdNum,
+        clientGoalId: clientData.clientGoalId && clientData.clientGoalId > 0 ? parseInt(clientData.clientGoalId, 10) : undefined,
+        clientObservations: clientObservations
+      };
 
-    this.showClientFormModal = false;
-    this.isEditClient = false;
-    this.clientFormInitialData = null;
+      if (this.isEditClient && this.clientFormInitialData) {
+        await this.clientService.updateClient(this.clientFormInitialData.id, clientRequest).toPromise();
+      } else {
+        await this.clientService.createClient(clientRequest).toPromise();
+      }
+
+      this.loadClients();
+      this.showClientFormModal = false;
+      this.isEditClient = false;
+      this.clientFormInitialData = null;
+
+    } catch (error: any) {
+      let errorMessage = 'Error al guardar el cliente. ';
+      if (error.error?.message) {
+        errorMessage += error.error.message;
+      } else if (error.message) {
+        errorMessage += error.message;
+      } else {
+        errorMessage += 'Por favor, intenta nuevamente.';
+      }
+
+      this.error = errorMessage;
+    } finally {
+      this.isLoading = false;
+    }
   }
 
   // Ahora el backend devuelve objetos completos, no solo IDs
@@ -198,6 +235,19 @@ export class ClientsPage implements OnInit {
       this.currentPage++;
       this.loadClients();
     }
+  }
+
+  // Formatear fecha para mostrar solo la fecha local, evitando problemas de zona horaria
+  formatDate(dateString: string | Date): string {
+    if (!dateString) return '';
+    
+    const date = new Date(dateString);
+    // Usar componentes locales para evitar problemas de zona horaria
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    
+    return `${year}-${month}-${day}`;
   }
 
 }

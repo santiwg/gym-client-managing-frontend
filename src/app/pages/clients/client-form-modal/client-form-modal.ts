@@ -83,12 +83,28 @@ export class ClientFormModal implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) return;
+    console.log('Form submitted, form valid:', this.form.valid);
+    console.log('Form errors:', this.form.errors);
+    console.log('Form controls errors:');
+    Object.keys(this.form.controls).forEach(key => {
+      const control = this.form.get(key);
+      if (control?.errors) {
+        console.log(`${key}:`, control.errors);
+      }
+    });
+
+    if (this.form.invalid) {
+      console.log('Form is invalid, not submitting');
+      return;
+    }
+
     const clientData = {
       ...this.form.value,
       registrationDate: this.form.value.registrationDate ? this.form.value.registrationDate : null,
       clientObservations: this.clientObservations
     };
+
+    console.log('Emitting clientData:', clientData);
     this.save.emit(clientData);
   }
 

@@ -89,10 +89,7 @@ export interface CreateClientRequest {
     clientObservations?: Omit<ClientObservation, 'id' | 'clientId'>[];
 }
 
-// DTO para actualizar cliente
-export interface UpdateClientRequest extends Partial<CreateClientRequest> {
-    id: number;
-}
+export interface UpdateClientRequest extends Partial<CreateClientRequest> { }
 
 // Para listados con paginación
 export interface ClientListResponse {
