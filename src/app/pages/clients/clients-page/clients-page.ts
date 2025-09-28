@@ -106,14 +106,14 @@ export class ClientsPage implements OnInit {
   editClient(client: any) {
     this.clientFormInitialData = {
       ...client,
-      genderId: client.genderId,
-      bloodTypeId: client.bloodTypeId,
-      clientGoalId: client.clientGoalId,
+      genderId: client.gender?.id || null,
+      bloodTypeId: client.bloodType?.id || null,
+      clientGoalId: client.clientGoal?.id || null,
       documentNumber: client.documentNumber,
       clientObservations: Array.isArray(client.observations)
-        ? client.observations.map((obs: string | { title: string; description: string; date: string }) =>
+        ? client.observations.map((obs: any) =>
           typeof obs === 'object'
-            ? obs
+            ? { title: obs.summary || '', description: obs.comment || '', date: obs.date || '' }
             : { title: obs, description: '', date: '' }
         )
         : []
