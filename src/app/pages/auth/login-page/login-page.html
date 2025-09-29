@@ -5,13 +5,27 @@
             <p class="subtitle">Please enter your details.</p>
 
             <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+                @if (error) {
+                    <div class="alert alert-danger">{{ error }}</div>
+                }
                 <label for="email">Email</label>
-                <input id="email" formControlName="email" placeholder="Enter your email..." />
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email..." />
+                @if (loginForm.get('email')?.touched && loginForm.get('email')?.invalid) {
+                    @if (loginForm.get('email')?.errors?.['required']) {
+                        <p class="text-danger">Email is required</p>
+                    }
+                    @if (loginForm.get('email')?.errors?.['email']) {
+                        <p class="text-danger">Email is invalid</p>
+                    }
+                }
 
                 <label for="password">Password</label>
                 <input id="password" type="password" formControlName="password" placeholder="Enter your password..." />
+                @if (loginForm.get('password')?.touched && loginForm.get('password')?.invalid) {
+                    <p class="text-danger">Password is required</p>
+                }
 
-                <button type="submit" class="btn-register">Login</button>
+                <button type="submit" class="btn-register btn btn-primary w-100" [disabled]="loginForm.invalid || loginForm.pending">Login</button>
             </form>
 
             <p class="login-link">

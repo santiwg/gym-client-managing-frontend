@@ -13,7 +13,7 @@ import { PaginationParams, PaginatedResponse } from '../interfaces/common.interf
     providedIn: 'root'
 })
 export class ClientService {
-
+    
     /**
      * Obtener todos los clientes con paginación - GET /client
      */

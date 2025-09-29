@@ -4,21 +4,51 @@
             <h1>Create an account</h1>
             <p class="subtitle">Fill in your details to get started.</p>
 
+            @if (successMessage) {
+                <div class="alert alert-success">{{ successMessage }}</div>
+            }
+
             <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                @if (error) {
+                    <div class="alert alert-danger">{{ error }}</div>
+                }
+
                 <label for="name">Name</label>
                 <input id="name" formControlName="name" placeholder="Enter your name..." />
+                @if (registerForm.get('name')?.invalid && registerForm.get('name')?.touched) {
+                    <p class="text-danger">Name is required</p>
+                }
 
                 <label for="email">Email</label>
-                <input id="email" formControlName="email" placeholder="Enter your email..." />
+                <input id="email" type="email" formControlName="email" placeholder="Enter your email..." />
+                @if (registerForm.get('email')?.touched && registerForm.get('email')?.invalid) {
+                    @if (registerForm.get('email')?.errors?.['required']) {
+                        <p class="text-danger">Email is required</p>
+                    }
+                    @if (registerForm.get('email')?.errors?.['email']) {
+                        <p class="text-danger">Email is invalid</p>
+                    }
+                }
 
                 <label for="password">Password</label>
                 <input id="password" type="password" formControlName="password" placeholder="Enter your password..." />
+                @if (registerForm.get('password')?.touched && registerForm.get('password')?.invalid) {
+                    @if (registerForm.get('password')?.errors?.['required']) {
+                        <p class="text-danger">Password is required</p>
+                    }
+                    @if (registerForm.get('password')?.errors?.['minlength']) {
+                        <p class="text-danger">Password must be at least 8 characters long</p>
+                    }
+                }
 
-                <label for="password">Confirm Password</label>
-                <input id="password" type="password" formControlName="passwordValidation"
+                <label for="password-confirm">Confirm Password</label>
+                <input id="password-confirm" type="password" formControlName="passwordValidation"
                     placeholder="Confirm your password..." />
+                @if (registerForm.hasError('passwordMismatch') && registerForm.get('passwordValidation')?.touched) {
+                    <p class="text-danger">Passwords don't match</p>
+                }
 
-                <button type="submit" class="btn-register">Register</button>
+                <button type="submit" class="btn-register btn btn-primary w-100" [disabled]="registerForm.invalid || registerForm.pending">Register</button>
             </form>
 
             <p class="login-link">
