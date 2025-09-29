@@ -90,7 +90,15 @@
                             <label class="form-label">Birth Date</label>
                             <input type="date" class="form-control" formControlName="birthDate" />
                             @if (form.get('birthDate')?.invalid && form.get('birthDate')?.touched) {
-                            <p class="text-danger">Birth date is required and must be valid.</p>
+                            @if (form.get('birthDate')?.errors?.['required']) {
+                            <p class="text-danger">Birth date is required.</p>
+                            } @else if (form.get('birthDate')?.errors?.['futureDate']) {
+                            <p class="text-danger">Birth date cannot be in the future.</p>
+                            } @else if (form.get('birthDate')?.errors?.['tooOldDate']) {
+                            <p class="text-danger">Birth date cannot be before year 1900.</p>
+                            } @else {
+                            <p class="text-danger">Birth date must be valid.</p>
+                            }
                             }
                         </div>
                         <div class="col-6">
@@ -129,7 +137,7 @@
                                 <tbody>
                                     @for (obs of clientObservations; track idx; let idx = $index) {
                                     <tr>
-                                        <td>{{ obs.title }}</td>
+                                        <td class="obs-title">{{ obs.title }}</td>
                                         <td>{{ obs.description }}</td>
                                         <td>{{ obs.date }}</td>
                                         <td>

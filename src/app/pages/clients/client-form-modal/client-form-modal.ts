@@ -21,18 +21,20 @@ export class ClientFormModal implements OnInit {
   form: FormGroup;
   clientObservations: any[] = [];
 
-  // Temporary observation for add/edit
-  observationTitle: string = '';
-  observationDescription: string = '';
-  observationDate: string = '';
+  // Estado del formulario de observaciones
+  observationTitle = '';
+  observationDescription = '';
+  observationDate = '';
   editObservationIndex: number | null = null;
-
-  // For visual validation
-  observationTitleTouched: boolean = false;
-  observationDescriptionTouched: boolean = false;
+  observationTitleTouched = false;
+  observationDescriptionTouched = false;
 
   constructor(private fb: FormBuilder) {
-    this.form = this.fb.group({
+    this.form = this.createClientForm();
+  }
+
+  private createClientForm(): FormGroup {
+    return this.fb.group({
       name: ['', Validators.required],
       lastName: ['', Validators.required],
       genderId: [null, [Validators.required, Validators.min(1)]],
@@ -41,99 +43,109 @@ export class ClientFormModal implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       phoneNumber: [''],
       address: [''],
-      birthDate: ['', [Validators.required, this.notFutureDateValidator]],
-      registrationDate: ['', this.notFutureDateValidator],
+      birthDate: ['', [Validators.required, this.dateValidator]],
+      registrationDate: ['', this.dateValidator],
       clientGoalId: [null]
     });
   }
 
-  // Validator to ensure the date is not in the future
-  notFutureDateValidator(control: any) {
+  // Validador para fechas válidas
+  dateValidator(control: any) {
     if (!control.value) return null;
+
     // Parse input as YYYY-MM-DD
     const [year, month, day] = control.value.split('-').map(Number);
+
+    // Validar que el año no sea anterior a 1900
+    if (year < 1900) {
+      return { tooOldDate: true };
+    }
+
     const birthDate = new Date(year, month - 1, day);
     const today = new Date();
     today.setHours(0, 0, 0, 0);
-    // Only allow birth dates less than or equal to today
+
+    // Solo permite fechas de nacimiento menores o iguales a hoy
     return birthDate > today ? { futureDate: true } : null;
   }
 
   ngOnInit() {
     if (this.initialClient) {
-      this.form.patchValue({
-        ...this.initialClient,
-        birthDate: this.formatDate(this.initialClient.birthDate),
-        registrationDate: this.initialClient.registrationDate ? this.formatDate(this.initialClient.registrationDate) : ''
-      });
-      this.clientObservations = Array.isArray(this.initialClient.clientObservations)
-        ? [...this.initialClient.clientObservations]
-        : [];
+      this.populateForm();
     }
   }
 
-  formatDate(date: any): string {
-    if (!date) return '';
-    const d = new Date(date);
-    return d.toISOString().substring(0, 10);
-  }
-
-  onCancel() {
-    this.close.emit();
-  }
-
-  submit() {
-    console.log('Form submitted, form valid:', this.form.valid);
-    console.log('Form errors:', this.form.errors);
-    console.log('Form controls errors:');
-    Object.keys(this.form.controls).forEach(key => {
-      const control = this.form.get(key);
-      if (control?.errors) {
-        console.log(`${key}:`, control.errors);
-      }
+  private populateForm(): void {
+    this.form.patchValue({
+      ...this.initialClient,
+      birthDate: this.formatDate(this.initialClient.birthDate),
+      registrationDate: this.initialClient.registrationDate ? this.formatDate(this.initialClient.registrationDate) : ''
     });
 
-    if (this.form.invalid) {
-      console.log('Form is invalid, not submitting');
-      return;
-    }
+    this.clientObservations = Array.isArray(this.initialClient.clientObservations)
+      ? [...this.initialClient.clientObservations]
+      : [];
+  }
+
+  private formatDate(date: any): string {
+    if (!date) return '';
+    return new Date(date).toISOString().substring(0, 10);
+  }
+
+  onCancel = () => this.close.emit();
+
+  submit() {
+    if (this.form.invalid) return;
 
     const clientData = {
       ...this.form.value,
-      registrationDate: this.form.value.registrationDate ? this.form.value.registrationDate : null,
+      registrationDate: this.form.value.registrationDate || null,
       clientObservations: this.clientObservations
     };
 
-    console.log('Emitting clientData:', clientData);
     this.save.emit(clientData);
   }
 
-  // Observations
+  // Métodos de observaciones
   addObservation() {
-    this.observationTitleTouched = true;
-    this.observationDescriptionTouched = true;
-    if (!this.observationTitle || !this.observationDescription) return;
+    this.markObservationFieldsAsTouched();
 
-    // Validate observation date if it exists
-    let observationDateError = null;
-    if (this.observationDate) {
-      observationDateError = this.notFutureDateValidator({ value: this.observationDate });
-      if (observationDateError) return;
-    }
+    if (!this.isObservationValid()) return;
 
-    const obs = {
-      title: this.observationTitle,
-      description: this.observationDescription,
-      date: this.observationDate ? this.observationDate : null
-    };
+    const observation = this.createObservation();
 
     if (this.editObservationIndex !== null) {
-      this.clientObservations[this.editObservationIndex] = obs;
+      this.clientObservations[this.editObservationIndex] = observation;
       this.editObservationIndex = null;
     } else {
-      this.clientObservations.push(obs);
+      this.clientObservations.push(observation);
     }
+
     this.clearObservationInputs();
+  }
+
+  private markObservationFieldsAsTouched(): void {
+    this.observationTitleTouched = true;
+    this.observationDescriptionTouched = true;
+  }
+
+  private isObservationValid(): boolean {
+    if (!this.observationTitle || !this.observationDescription) return false;
+
+    if (this.observationDate) {
+      const dateError = this.dateValidator({ value: this.observationDate });
+      if (dateError) return false;
+    }
+
+    return true;
+  }
+
+  private createObservation() {
+    return {
+      title: this.observationTitle,
+      description: this.observationDescription,
+      date: this.observationDate || null
+    };
   }
 
   editObservation(idx: number) {
@@ -147,12 +159,10 @@ export class ClientFormModal implements OnInit {
   deleteObservation(idx: number) {
     this.clientObservations.splice(idx, 1);
     if (this.editObservationIndex === idx) {
-      this.clearObservationInputs();
-      this.editObservationIndex = null;
+      this.cancelEditObservation();
     }
   }
 
-  // Clear observation input fields
   clearObservationInputs() {
     this.observationTitle = '';
     this.observationDescription = '';
@@ -161,29 +171,21 @@ export class ClientFormModal implements OnInit {
     this.observationDescriptionTouched = false;
   }
 
-  // Disable add observation button if required fields are empty
-  get isAddObservationDisabled(): boolean {
-    return !this.observationTitle || !this.observationDescription || !!this.observationDateError;
-  }
-
-  // Mark title as touched for validation
-  onObservationTitleInput() {
-    this.observationTitleTouched = true;
-  }
-
-  // Mark description as touched for validation
-  onObservationDescriptionInput() {
-    this.observationDescriptionTouched = true;
-  }
-
-  // Cancel editing observation
   cancelEditObservation() {
     this.clearObservationInputs();
     this.editObservationIndex = null;
   }
 
-  get observationDateError() {
-    if (!this.observationDate) return null;
-    return this.notFutureDateValidator({ value: this.observationDate });
+  // Getters y Helpers
+  get isAddObservationDisabled(): boolean {
+    return !this.observationTitle || !this.observationDescription || !!this.observationDateError;
   }
+
+  get observationDateError() {
+    return this.observationDate ? this.dateValidator({ value: this.observationDate }) : null;
+  }
+
+  onObservationTitleInput = () => this.observationTitleTouched = true;
+  onObservationDescriptionInput = () => this.observationDescriptionTouched = true;
+
 }

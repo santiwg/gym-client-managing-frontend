@@ -9,118 +9,82 @@ import { State } from '../interfaces/common.interface';
 })
 export class CommonDataService {
 
-    // Géneros
-    async getGenders(): Promise<Gender[]> {
+    // Métodos genéricos para manejar requests comunes
+    // GET
+    private async getData<T>(url: string, errorMessage: string): Promise<T[]> {
         try {
-            const response = await axiosClient.get(config.urls.genders);
+            const response = await axiosClient.get(url);
             return response.data;
         } catch (error: any) {
-            console.error('Get genders error:', error);
-            throw new Error('Error al obtener géneros');
+            console.error(`Get ${errorMessage} error:`, error);
+            throw new Error(`Error al obtener ${errorMessage}`);
         }
     }
 
-    async createGender(name: string): Promise<Gender> {
+    // POST
+    private async createData<T>(url: string, data: any, errorMessage: string): Promise<T> {
         try {
-            const response = await axiosClient.post(config.urls.genders, { name });
+            const response = await axiosClient.post(url, data);
             return response.data;
         } catch (error: any) {
-            console.error('Create gender error:', error);
-            throw new Error('Error al crear género');
+            console.error(`Create ${errorMessage} error:`, error);
+            throw new Error(`Error al crear ${errorMessage}`);
         }
     }
 
-    // Tipos de sangre
-    async getBloodTypes(): Promise<BloodType[]> {
+    // PUT
+    private async updateData<T>(url: string, id: number, data: any, errorMessage: string): Promise<T> {
         try {
-            const response = await axiosClient.get(config.urls.bloodTypes);
+            const response = await axiosClient.put(`${url}/${id}`, data);
             return response.data;
         } catch (error: any) {
-            console.error('Get blood types error:', error);
-            throw new Error('Error al obtener tipos de sangre');
+            console.error(`Update ${errorMessage} error:`, error);
+            throw new Error(`Error al actualizar ${errorMessage}`);
         }
     }
 
-    async createBloodType(type: string): Promise<BloodType> {
+    // DELETE
+    private async deleteData(url: string, id: number, errorMessage: string): Promise<void> {
         try {
-            const response = await axiosClient.post(config.urls.bloodTypes, { type });
-            return response.data;
+            await axiosClient.delete(`${url}/${id}`);
         } catch (error: any) {
-            console.error('Create blood type error:', error);
-            throw new Error('Error al crear tipo de sangre');
+            console.error(`Delete ${errorMessage} error:`, error);
+            throw new Error(`Error al eliminar ${errorMessage}`);
         }
     }
 
-    // Estados/Provincias
-    async getStates(): Promise<State[]> {
-        try {
-            const response = await axiosClient.get(config.urls.states);
-            return response.data;
-        } catch (error: any) {
-            console.error('Get states error:', error);
-            throw new Error('Error al obtener estados');
-        }
-    }
+    // Métodos específicos para cada tipo de dato común
 
-    async createState(name: string): Promise<State> {
-        try {
-            const response = await axiosClient.post(config.urls.states, { name });
-            return response.data;
-        } catch (error: any) {
-            console.error('Create state error:', error);
-            throw new Error('Error al crear estado');
-        }
-    }
+    // Gender
+    getGenders = (): Promise<Gender[]> => this.getData(config.urls.genders, 'géneros');
+    createGender = (name: string): Promise<Gender> => this.createData(config.urls.genders, { name }, 'género');
 
-    // Membresías
+    // Blood Types
+    getBloodTypes = (): Promise<BloodType[]> => this.getData(config.urls.bloodTypes, 'tipos de sangre');
+    createBloodType = (type: string): Promise<BloodType> => this.createData(config.urls.bloodTypes, { type }, 'tipo de sangre');
+
+    // States
+    getStates = (): Promise<State[]> => this.getData(config.urls.states, 'estados');
+    createState = (name: string): Promise<State> => this.createData(config.urls.states, { name }, 'estado');
+
+    // Client Goals
+    getClientGoals = (): Promise<ClientGoal[]> => this.getData(config.urls.clientGoals, 'objetivos de cliente');
+
+    // Memberships (más complejas, mantienen métodos específicos)
     async getMemberships(): Promise<Membership[]> {
-        try {
-            const response = await axiosClient.get(config.urls.memberships);
-            return response.data;
-        } catch (error: any) {
-            console.error('Get memberships error:', error);
-            throw new Error('Error al obtener membresías');
-        }
+        return this.getData(config.urls.memberships, 'membresías');
     }
 
     async createMembership(membershipData: any): Promise<Membership> {
-        try {
-            const response = await axiosClient.post(config.urls.memberships, membershipData);
-            return response.data;
-        } catch (error: any) {
-            console.error('Create membership error:', error);
-            throw new Error('Error al crear membresía');
-        }
+        return this.createData(config.urls.memberships, membershipData, 'membresía');
     }
 
     async updateMembership(id: number, membershipData: any): Promise<Membership> {
-        try {
-            const response = await axiosClient.put(`${config.urls.memberships}/${id}`, membershipData);
-            return response.data;
-        } catch (error: any) {
-            console.error('Update membership error:', error);
-            throw new Error('Error al actualizar membresía');
-        }
+        return this.updateData(config.urls.memberships, id, membershipData, 'membresía');
     }
 
     async deleteMembership(id: number): Promise<void> {
-        try {
-            await axiosClient.delete(`${config.urls.memberships}/${id}`);
-        } catch (error: any) {
-            console.error('Delete membership error:', error);
-            throw new Error('Error al eliminar membresía');
-        }
-    }
-
-    // Objetivos de cliente
-    async getClientGoals(): Promise<ClientGoal[]> {
-        try {
-            const response = await axiosClient.get(config.urls.clientGoals);
-            return response.data;
-        } catch (error: any) {
-            console.error('Get client goals error:', error);
-            throw new Error('Error al obtener objetivos de cliente');
-        }
+        return this.deleteData(config.urls.memberships, id, 'membresía');
     }
 
 }

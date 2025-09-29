@@ -297,6 +297,10 @@
     align-items: center;
 }
 
+.obs-title {
+    font-weight: bold;
+}
+
 /* Separación entre botones de Editar y Eliminar */
 .btn-accent {
     margin-right: 0.5rem;
