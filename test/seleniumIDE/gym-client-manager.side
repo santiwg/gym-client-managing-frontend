@@ -2,372 +2,8 @@
   "id": "c2ff2267-115e-4c7b-b420-438faccf1688",
   "version": "2.0",
   "name": "gym-client-manager",
-  "url": "http://localhost:4200/register",
+  "url": "http://localhost:4200/login",
   "tests": [{
-    "id": "a34099db-c7a4-425b-ab34-4dd6da4a096d",
-    "name": "add-client",
-    "commands": [{
-      "id": "c7cb47b9-bc0b-45d1-aec9-4f8fec256fb2",
-      "comment": "",
-      "command": "click",
-      "target": "css=.add-btn",
-      "targets": [
-        ["css=.add-btn", "css:finder"],
-        ["xpath=//div/div/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Add')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "8a5f3e75-202e-4d91-b753-97766e8541ee",
-      "comment": "",
-      "command": "click",
-      "target": "css=.row:nth-child(1) > .col-6:nth-child(1) > .form-control",
-      "targets": [
-        ["css=.row:nth-child(1) > .col-6:nth-child(1) > .form-control", "css:finder"],
-        ["xpath=//input[@type='text']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "5a3b5dfa-55d1-4874-a565-ae07601d5907",
-      "comment": "",
-      "command": "type",
-      "target": "css=.ng-dirty:nth-child(2)",
-      "targets": [
-        ["css=.ng-dirty:nth-child(2)", "css:finder"],
-        ["xpath=//input[@type='text']", "xpath:attributes"],
-        ["xpath=//input", "xpath:position"]
-      ],
-      "value": "Imanol"
-    }, {
-      "id": "c4e29bcc-4a77-429d-a0df-013d02eaf042",
-      "comment": "",
-      "command": "click",
-      "target": "css=.row:nth-child(1) .ng-untouched",
-      "targets": [
-        ["css=.row:nth-child(1) .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='text'])[2]", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "3aca5c8d-60a1-4fb2-81fb-4dd880f08d32",
-      "comment": "",
-      "command": "type",
-      "target": "css=.col-6:nth-child(2) > .ng-dirty",
-      "targets": [
-        ["css=.col-6:nth-child(2) > .ng-dirty", "css:finder"],
-        ["xpath=(//input[@type='text'])[2]", "xpath:attributes"],
-        ["xpath=//div[2]/input", "xpath:position"]
-      ],
-      "value": "Barrionuevo"
-    }, {
-      "id": "cbdf41aa-3e1e-4427-aa35-295bcbae7ecc",
-      "comment": "",
-      "command": "select",
-      "target": "css=.col-6:nth-child(1) > .form-select",
-      "targets": [],
-      "value": "label=Male"
-    }, {
-      "id": "9563b7dc-ff1e-4850-a358-0f09470cd290",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-6:nth-child(1) option:nth-child(2)",
-      "targets": [
-        ["css=.col-6:nth-child(1) option:nth-child(2)", "css:finder"],
-        ["xpath=//option[@value='1']", "xpath:attributes"],
-        ["xpath=//option[2]", "xpath:position"],
-        ["xpath=//option[contains(.,'Male')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "40a382db-d8fa-4714-83ee-35f80545aa53",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-6:nth-child(2) > .form-select",
-      "targets": [
-        ["css=.col-6:nth-child(2) > .form-select", "css:finder"],
-        ["xpath=//div[2]/select", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "90d2ff0b-5967-48f5-a97e-04abbd26c3d9",
-      "comment": "",
-      "command": "select",
-      "target": "css=.col-6:nth-child(2) > .form-select",
-      "targets": [],
-      "value": "label=O+"
-    }, {
-      "id": "e426ef2a-aced-459b-b213-23a0025c3dd9",
-      "comment": "",
-      "command": "click",
-      "target": "css=.ng-invalid > option:nth-child(8)",
-      "targets": [
-        ["css=.ng-invalid > option:nth-child(8)", "css:finder"],
-        ["xpath=//option[@value='7']", "xpath:attributes"],
-        ["xpath=//option[8]", "xpath:position"],
-        ["xpath=//option[contains(.,'O+')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "c10a2b56-57ea-40b6-bec9-b87a953d1c38",
-      "comment": "",
-      "command": "click",
-      "target": "css=.row:nth-child(3) > .col-6:nth-child(1) > .form-control",
-      "targets": [
-        ["css=.row:nth-child(3) > .col-6:nth-child(1) > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "16b7dd36-bb68-45fc-b95f-8d44be333be4",
-      "comment": "",
-      "command": "type",
-      "target": "css=.row:nth-child(3) .ng-dirty",
-      "targets": [
-        ["css=.row:nth-child(3) .ng-dirty", "css:finder"],
-        ["xpath=(//input[@type='text'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/div/input", "xpath:position"]
-      ],
-      "value": "45837962"
-    }, {
-      "id": "68bd7faa-3a76-489a-a621-559632008018",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-6:nth-child(2) > .ng-invalid",
-      "targets": [
-        ["css=.col-6:nth-child(2) > .ng-invalid", "css:finder"],
-        ["xpath=//input[@type='email']", "xpath:attributes"],
-        ["xpath=//div[3]/div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "151c34f3-f6e7-4e55-8fcb-1c346b9c87e3",
-      "comment": "",
-      "command": "type",
-      "target": "css=.row:nth-child(3) .ng-untouched",
-      "targets": [
-        ["css=.row:nth-child(3) .ng-untouched", "css:finder"],
-        ["xpath=//input[@type='email']", "xpath:attributes"],
-        ["xpath=//div[3]/div[2]/input", "xpath:position"]
-      ],
-      "value": "barrionuevoimanol@gmail.com"
-    }, {
-      "id": "1957a9f7-f89b-44ca-afab-bfb732b6bab2",
-      "comment": "",
-      "command": "click",
-      "target": "css=.row:nth-child(4) > .col-6:nth-child(1) > .form-control",
-      "targets": [
-        ["css=.row:nth-child(4) > .col-6:nth-child(1) > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[4]", "xpath:attributes"],
-        ["xpath=//div[4]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "9046ceaf-2103-4a37-9a5d-02ef5454059b",
-      "comment": "",
-      "command": "type",
-      "target": "css=.row:nth-child(4) .ng-dirty",
-      "targets": [
-        ["css=.row:nth-child(4) .ng-dirty", "css:finder"],
-        ["xpath=(//input[@type='text'])[4]", "xpath:attributes"],
-        ["xpath=//div[4]/div/input", "xpath:position"]
-      ],
-      "value": "+5493535642953"
-    }, {
-      "id": "3bdb62c1-af84-47a9-b585-35d8b7d1e890",
-      "comment": "",
-      "command": "click",
-      "target": "css=.row:nth-child(4) .ng-untouched",
-      "targets": [
-        ["css=.row:nth-child(4) .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
-        ["xpath=//div[4]/div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "cc18b9bf-cef3-4c14-a69f-44be21ece5a0",
-      "comment": "",
-      "command": "type",
-      "target": "css=.row:nth-child(4) .ng-untouched",
-      "targets": [
-        ["css=.row:nth-child(4) .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='text'])[5]", "xpath:attributes"],
-        ["xpath=//div[4]/div[2]/input", "xpath:position"]
-      ],
-      "value": "ARA 17 de Octubre 2585"
-    }, {
-      "id": "565399da-a03b-421c-b7a9-ba425f66a119",
-      "comment": "",
-      "command": "click",
-      "target": "css=.ng-invalid:nth-child(2)",
-      "targets": [
-        ["css=.ng-invalid:nth-child(2)", "css:finder"],
-        ["xpath=//input[@type='date']", "xpath:attributes"],
-        ["xpath=//div[5]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "65266927-cb97-4f39-b71f-23874ed643fe",
-      "comment": "",
-      "command": "type",
-      "target": "css=.ng-invalid:nth-child(2)",
-      "targets": [
-        ["css=.ng-invalid:nth-child(2)", "css:finder"],
-        ["xpath=//input[@type='date']", "xpath:attributes"],
-        ["xpath=//div[5]/div/input", "xpath:position"]
-      ],
-      "value": "2004-09-23"
-    }, {
-      "id": "7e06dd6d-e00a-4919-b136-1be77ce8eb6c",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-6 > .ng-untouched",
-      "targets": [
-        ["css=.col-6 > .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='date'])[2]", "xpath:attributes"],
-        ["xpath=//div[5]/div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "67a49d60-b1aa-4be7-a575-8696697655c4",
-      "comment": "",
-      "command": "type",
-      "target": "css=.col-6 > .ng-untouched",
-      "targets": [
-        ["css=.col-6 > .ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='date'])[2]", "xpath:attributes"],
-        ["xpath=//div[5]/div[2]/input", "xpath:position"]
-      ],
-      "value": "2023-01-16"
-    }, {
-      "id": "58569739-2d77-47f1-971b-a0ce8f0e1496",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-12 > .form-select",
-      "targets": [
-        ["css=.col-12 > .form-select", "css:finder"],
-        ["xpath=//div[6]/div/select", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "7105e6a1-cede-496b-a74e-f6dd282ff096",
-      "comment": "",
-      "command": "select",
-      "target": "css=.col-12 > .form-select",
-      "targets": [],
-      "value": "label=Muscle Gain"
-    }, {
-      "id": "3e70d308-840b-4734-bc12-12cf49bfbec9",
-      "comment": "",
-      "command": "click",
-      "target": "css=.ng-untouched > option:nth-child(3)",
-      "targets": [
-        ["css=.ng-untouched > option:nth-child(3)", "css:finder"],
-        ["xpath=(//option[@value='2'])[3]", "xpath:attributes"],
-        ["xpath=//div[6]/div/select/option[3]", "xpath:position"],
-        ["xpath=//option[contains(.,'Muscle Gain')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "aa01f17e-7e7e-40f1-8441-4c67c73bec6d",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-4 > .form-control",
-      "targets": [
-        ["css=.col-4 > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "2e9c0261-bf12-49ff-b1af-410a33328ebb",
-      "comment": "",
-      "command": "type",
-      "target": "css=.col-4 > .form-control",
-      "targets": [
-        ["css=.col-4 > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
-        ["xpath=//div[2]/div/input", "xpath:position"]
-      ],
-      "value": "Test Observation"
-    }, {
-      "id": "00dfd1fa-20bd-42c0-9c52-dc2e33058c6e",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-5 > .form-control",
-      "targets": [
-        ["css=.col-5 > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[7]", "xpath:attributes"],
-        ["xpath=//div[2]/div[2]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "115a1018-1cbf-464f-ba64-4f9c02077fd5",
-      "comment": "",
-      "command": "type",
-      "target": "css=.col-5 > .form-control",
-      "targets": [
-        ["css=.col-5 > .form-control", "css:finder"],
-        ["xpath=(//input[@type='text'])[7]", "xpath:attributes"],
-        ["xpath=//div[2]/div[2]/input", "xpath:position"]
-      ],
-      "value": "This is a description"
-    }, {
-      "id": "f150705f-35db-4048-8bf9-60ae6452ff27",
-      "comment": "",
-      "command": "click",
-      "target": "css=.ng-untouched",
-      "targets": [
-        ["css=.ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='date'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "56f80eea-5f8d-4dcd-a40f-e6c92b528189",
-      "comment": "",
-      "command": "type",
-      "target": "css=.ng-untouched",
-      "targets": [
-        ["css=.ng-untouched", "css:finder"],
-        ["xpath=(//input[@type='date'])[3]", "xpath:attributes"],
-        ["xpath=//div[3]/input", "xpath:position"]
-      ],
-      "value": "2023-01-12"
-    }, {
-      "id": "3f3a025a-d80e-4bbe-b1ef-c1650ec55404",
-      "comment": "",
-      "command": "click",
-      "target": "css=.col-btn > .btn",
-      "targets": [
-        ["css=.col-btn > .btn", "css:finder"],
-        ["xpath=(//button[@type='button'])[14]", "xpath:attributes"],
-        ["xpath=//div[4]/button", "xpath:position"]
-      ],
-      "value": ""
-    }, {
-      "id": "a1768f6e-8722-45b3-abfb-5905558d4a5e",
-      "comment": "",
-      "command": "click",
-      "target": "css=.btn-confirm",
-      "targets": [
-        ["css=.btn-confirm", "css:finder"],
-        ["xpath=//button[@type='submit']", "xpath:attributes"],
-        ["xpath=//div[8]/button", "xpath:position"],
-        ["xpath=//button[contains(.,'Register')]", "xpath:innerText"]
-      ],
-      "value": ""
-    }, {
-      "id": "e6e02370-6262-4c57-a3ad-37d14748fd04",
-      "comment": "",
-      "command": "open",
-      "target": "http://localhost:4200/clients",
-      "targets": [],
-      "value": ""
-    }]
-  }, {
     "id": "e7265fa6-fc04-418b-91d6-a6282709b017",
     "name": "register",
     "commands": [{
@@ -501,6 +137,457 @@
       "target": "css=.alert-success",
       "targets": [],
       "value": "User successfully registered"
+    }]
+  }, {
+    "id": "df76f4db-63a9-4785-a2c7-b22abf07f5f2",
+    "name": "add-client",
+    "commands": [{
+      "id": "f7ab4156-eb35-4ddb-aa6a-feb25f4b4d78",
+      "comment": "",
+      "command": "open",
+      "target": "http://localhost:4200/login",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "42fd0db6-83e6-463f-b312-1f5c376d674c",
+      "comment": "",
+      "command": "setWindowSize",
+      "target": "1070x944",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "ef5b799b-8ca0-4f57-8213-3ee29315c021",
+      "comment": "",
+      "command": "click",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "0bc68a98-1d97-40ed-b1d4-8cf02a7811c7",
+      "comment": "",
+      "command": "type",
+      "target": "id=email",
+      "targets": [
+        ["id=email", "id"],
+        ["css=#email", "css:finder"],
+        ["xpath=//input[@id='email']", "xpath:attributes"],
+        ["xpath=//input", "xpath:position"]
+      ],
+      "value": "barrionuevoimanol@gmail.com"
+    }, {
+      "id": "06cbe83f-c123-4ad3-9b15-407249c4fb1e",
+      "comment": "",
+      "command": "click",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ed3d6b2b-f476-4d01-aa7f-fa32626b374d",
+      "comment": "",
+      "command": "type",
+      "target": "id=password",
+      "targets": [
+        ["id=password", "id"],
+        ["css=#password", "css:finder"],
+        ["xpath=//input[@id='password']", "xpath:attributes"],
+        ["xpath=//input[2]", "xpath:position"]
+      ],
+      "value": "12345678"
+    }, {
+      "id": "de9c3fee-aa2a-4d9c-b178-9159355d860c",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-register",
+      "targets": [
+        ["css=.btn-register", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//button", "xpath:position"],
+        ["xpath=//button[contains(.,'Login')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "2df61b21-05b6-4b9c-8916-847111557ea1",
+      "comment": "",
+      "command": "click",
+      "target": "css=.nav-item:nth-child(2) .label",
+      "targets": [
+        ["css=.nav-item:nth-child(2) .label", "css:finder"],
+        ["xpath=//li[2]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Clients')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "17db291a-130a-43d0-afe1-e6b743723934",
+      "comment": "",
+      "command": "mouseOver",
+      "target": "css=.active > .label",
+      "targets": [
+        ["css=.active > .label", "css:finder"],
+        ["xpath=//li[2]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Clients')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "1cc6cd7e-a6f0-4b69-adda-7c2785acde7f",
+      "comment": "",
+      "command": "mouseOut",
+      "target": "css=.active > .label",
+      "targets": [
+        ["css=.active > .label", "css:finder"],
+        ["xpath=//li[2]/a/span", "xpath:position"],
+        ["xpath=//span[contains(.,'Clients')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "45433f1e-e65d-4220-8d5f-9de8d3f0226f",
+      "comment": "",
+      "command": "click",
+      "target": "css=.add-btn",
+      "targets": [
+        ["css=.add-btn", "css:finder"],
+        ["xpath=//div/div/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Add')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "896f34a9-4cd7-45e8-b697-f710ecdf5053",
+      "comment": "Click on First Name input",
+      "command": "click",
+      "target": "css=input[formcontrolname='name']",
+      "targets": [
+        ["css=input[formcontrolname='name']", "css:finder"],
+        ["xpath=//input[@formcontrolname='name']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "2f3a40e4-140c-43fa-86c4-4daccdc80b3a",
+      "comment": "Type First Name",
+      "command": "type",
+      "target": "css=input[formcontrolname='name']",
+      "targets": [
+        ["css=input[formcontrolname='name']", "css:finder"],
+        ["xpath=//input[@formcontrolname='name']", "xpath:attributes"]
+      ],
+      "value": "Test"
+    }, {
+      "id": "203218f2-0b9f-42e5-9fd0-2f0a05029d7d",
+      "comment": "Click on Last Name input",
+      "command": "click",
+      "target": "css=input[formcontrolname='lastName']",
+      "targets": [
+        ["css=input[formcontrolname='lastName']", "css:finder"],
+        ["xpath=//input[@formcontrolname='lastName']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "2180ecbd-425b-4930-9640-5fa0e1bd97de",
+      "comment": "Type Last Name",
+      "command": "type",
+      "target": "css=input[formcontrolname='lastName']",
+      "targets": [
+        ["css=input[formcontrolname='lastName']", "css:finder"],
+        ["xpath=//input[@formcontrolname='lastName']", "xpath:attributes"]
+      ],
+      "value": "User"
+    }, {
+      "id": "f89a521e-42b7-4c58-880e-0dd6eb20cfe6",
+      "comment": "Click Gender select",
+      "command": "click",
+      "target": "css=select[formcontrolname='genderId']",
+      "targets": [
+        ["css=select[formcontrolname='genderId']", "css:finder"],
+        ["xpath=//select[@formcontrolname='genderId']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "e2348a2a-718a-49d8-955b-d7e98f04464e",
+      "comment": "Select Gender",
+      "command": "select",
+      "target": "css=select[formcontrolname='genderId']",
+      "targets": [],
+      "value": "label=Prefer not to say"
+    }, {
+      "id": "9dff31c3-3f9d-469e-ab87-15c56136ce86",
+      "comment": "Click Blood Type select",
+      "command": "click",
+      "target": "css=select[formcontrolname='bloodTypeId']",
+      "targets": [
+        ["css=select[formcontrolname='bloodTypeId']", "css:finder"],
+        ["xpath=//select[@formcontrolname='bloodTypeId']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "5ed55ac2-c6f7-4438-87c2-2958c60125c2",
+      "comment": "Select Blood Type",
+      "command": "select",
+      "target": "css=select[formcontrolname='bloodTypeId']",
+      "targets": [],
+      "value": "label=AB+"
+    }, {
+      "id": "e9d33696-f88f-4306-81cc-720257bfd21f",
+      "comment": "Click Document Number input",
+      "command": "click",
+      "target": "css=input[formcontrolname='documentNumber']",
+      "targets": [
+        ["css=input[formcontrolname='documentNumber']", "css:finder"],
+        ["xpath=//input[@formcontrolname='documentNumber']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "gen-doc-number-1",
+      "comment": "Generate unique 8-digit document number",
+      "command": "executeScript",
+      "target": "return String(Math.floor(10000000 + Math.random() * 90000000));",
+      "targets": [],
+      "value": "uniqueDocNumber"
+    }, {
+      "id": "gen-doc-number-2",
+      "comment": "Echo document number for debugging",
+      "command": "echo",
+      "target": "${uniqueDocNumber}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "a07746bf-b443-4133-8b5d-ade4304c0da2",
+      "comment": "Type Document Number",
+      "command": "type",
+      "target": "css=input[formcontrolname='documentNumber']",
+      "targets": [
+        ["css=input[formcontrolname='documentNumber']", "css:finder"],
+        ["xpath=//input[@formcontrolname='documentNumber']", "xpath:attributes"]
+      ],
+      "value": "${uniqueDocNumber}"
+    }, {
+      "id": "625394d0-1a85-4706-b0ea-522c0eb6919b",
+      "comment": "Click Email input",
+      "command": "click",
+      "target": "css=input[formcontrolname='email']",
+      "targets": [
+        ["css=input[formcontrolname='email']", "css:finder"],
+        ["xpath=//input[@formcontrolname='email']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "gen-email-1",
+      "comment": "Generate unique email",
+      "command": "executeScript",
+      "target": "return 'client' + Date.now() + '@test.com';",
+      "targets": [],
+      "value": "uniqueClientEmail"
+    }, {
+      "id": "gen-email-2",
+      "comment": "Echo email for debugging",
+      "command": "echo",
+      "target": "${uniqueClientEmail}",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "642515f0-44fe-483b-b24f-1a9bc6727961",
+      "comment": "Type Email",
+      "command": "type",
+      "target": "css=input[formcontrolname='email']",
+      "targets": [
+        ["css=input[formcontrolname='email']", "css:finder"],
+        ["xpath=//input[@formcontrolname='email']", "xpath:attributes"]
+      ],
+      "value": "${uniqueClientEmail}"
+    }, {
+      "id": "87e71b02-1375-4158-91b8-27c4068446d0",
+      "comment": "Click Phone Number input",
+      "command": "click",
+      "target": "css=input[formcontrolname='phoneNumber']",
+      "targets": [
+        ["css=input[formcontrolname='phoneNumber']", "css:finder"],
+        ["xpath=//input[@formcontrolname='phoneNumber']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "041d39f6-b210-4ba7-b6a1-a69d2f99cd3e",
+      "comment": "Type Phone Number",
+      "command": "type",
+      "target": "css=input[formcontrolname='phoneNumber']",
+      "targets": [
+        ["css=input[formcontrolname='phoneNumber']", "css:finder"],
+        ["xpath=//input[@formcontrolname='phoneNumber']", "xpath:attributes"]
+      ],
+      "value": "3535642953"
+    }, {
+      "id": "9885dc39-cc76-4b26-aaf0-900025fe0278",
+      "comment": "Click Address input",
+      "command": "click",
+      "target": "css=input[formcontrolname='address']",
+      "targets": [
+        ["css=input[formcontrolname='address']", "css:finder"],
+        ["xpath=//input[@formcontrolname='address']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "2545e66b-a79c-4cc1-bd6e-54c9b942f007",
+      "comment": "Type Address",
+      "command": "type",
+      "target": "css=input[formcontrolname='address']",
+      "targets": [
+        ["css=input[formcontrolname='address']", "css:finder"],
+        ["xpath=//input[@formcontrolname='address']", "xpath:attributes"]
+      ],
+      "value": "Test Address"
+    }, {
+      "id": "fde082be-d48d-4f06-9f85-7e02b821823a",
+      "comment": "Set Birth Date using JavaScript",
+      "command": "executeScript",
+      "target": "document.querySelector(\"input[formcontrolname='birthDate']\").value = '2001-01-01'; document.querySelector(\"input[formcontrolname='birthDate']\").dispatchEvent(new Event('input', { bubbles: true })); document.querySelector(\"input[formcontrolname='birthDate']\").dispatchEvent(new Event('change', { bubbles: true }));",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2ec5f1df-4b5c-4df5-8666-e113b32370ba",
+      "comment": "Set Registration Date using JavaScript",
+      "command": "executeScript",
+      "target": "document.querySelector(\"input[formcontrolname='registrationDate']\").value = '2022-01-01'; document.querySelector(\"input[formcontrolname='registrationDate']\").dispatchEvent(new Event('input', { bubbles: true })); document.querySelector(\"input[formcontrolname='registrationDate']\").dispatchEvent(new Event('change', { bubbles: true }));",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "adc3cfbb-e01d-405a-b69d-85338ad8fa08",
+      "comment": "Click Client Goal select",
+      "command": "click",
+      "target": "css=select[formcontrolname='clientGoalId']",
+      "targets": [
+        ["css=select[formcontrolname='clientGoalId']", "css:finder"],
+        ["xpath=//select[@formcontrolname='clientGoalId']", "xpath:attributes"]
+      ],
+      "value": ""
+    }, {
+      "id": "76dfee81-946e-47d6-9a58-bc6a7463569e",
+      "comment": "Select Client Goal",
+      "command": "select",
+      "target": "css=select[formcontrolname='clientGoalId']",
+      "targets": [],
+      "value": "label=Muscle Gain"
+    }, {
+      "id": "752a3d3c-bc0f-4fe0-acc2-12158feaba16",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-4 > .form-control",
+      "targets": [
+        ["css=.col-4 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "8645faa7-f67f-406d-aa41-e5a9eb4a42c0",
+      "comment": "",
+      "command": "type",
+      "target": "css=.col-4 > .form-control",
+      "targets": [
+        ["css=.col-4 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[6]", "xpath:attributes"],
+        ["xpath=//div[2]/div/input", "xpath:position"]
+      ],
+      "value": "Title"
+    }, {
+      "id": "04b3c2b7-ee08-4342-80f2-567d4d025382",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-5 > .form-control",
+      "targets": [
+        ["css=.col-5 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[7]", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7980bf6e-b654-4726-8d0f-1a4928be7d65",
+      "comment": "",
+      "command": "type",
+      "target": "css=.col-5 > .form-control",
+      "targets": [
+        ["css=.col-5 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='text'])[7]", "xpath:attributes"],
+        ["xpath=//div[2]/div[2]/input", "xpath:position"]
+      ],
+      "value": "Description"
+    }, {
+      "id": "7a806597-9450-41b9-b06f-533550f8a049",
+      "comment": "",
+      "command": "click",
+      "target": "css=.col-3 > .form-control",
+      "targets": [
+        ["css=.col-3 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='date'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "ecd66ada-ad6b-4e3f-9a67-26e04675a549",
+      "comment": "",
+      "command": "type",
+      "target": "css=.col-3 > .form-control",
+      "targets": [
+        ["css=.col-3 > .form-control", "css:finder"],
+        ["xpath=(//input[@type='date'])[3]", "xpath:attributes"],
+        ["xpath=//div[3]/input", "xpath:position"]
+      ],
+      "value": "2022-01-01"
+    }, {
+      "id": "2ec5f1df-4b5c-4df5-8666-e113b32370ba",
+      "comment": "",
+      "command": "click",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=(//input[@type='date'])[2]", "xpath:attributes"],
+        ["xpath=//div[5]/div[2]/input", "xpath:position"]
+      ],
+      "value": ""
+    }, {
+      "id": "7e188491-82f4-4d6a-b330-e98a2f9a4766",
+      "comment": "",
+      "command": "type",
+      "target": "css=.ng-untouched",
+      "targets": [
+        ["css=.ng-untouched", "css:finder"],
+        ["xpath=(//input[@type='date'])[2]", "xpath:attributes"],
+        ["xpath=//div[5]/div[2]/input", "xpath:position"]
+      ],
+      "value": "2022-01-01"
+    }, {
+      "id": "4fa33c2c-f92a-49b2-b62e-e7e88ff5c961",
+      "comment": "",
+      "command": "click",
+      "target": "css=.btn-confirm",
+      "targets": [
+        ["css=.btn-confirm", "css:finder"],
+        ["xpath=//button[@type='submit']", "xpath:attributes"],
+        ["xpath=//div[8]/button", "xpath:position"],
+        ["xpath=//button[contains(.,'Register')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "verify-success-1",
+      "comment": "Wait for success message to appear",
+      "command": "waitForElementPresent",
+      "target": "css=.alert-success",
+      "targets": [
+        ["css=.alert-success", "css:finder"]
+      ],
+      "value": "5000"
+    }, {
+      "id": "verify-success-2",
+      "comment": "Verify success message text",
+      "command": "waitForText",
+      "target": "css=.alert-success",
+      "targets": [],
+      "value": "Client created successfully"
     }]
   }],
   "suites": [{
