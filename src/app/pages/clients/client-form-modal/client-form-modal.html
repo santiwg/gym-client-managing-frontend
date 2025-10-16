@@ -9,8 +9,18 @@
                 </h3>
                 <button type="button" class="btn-close" (click)="onCancel()" aria-label="Close"></button>
             </div>
+
+            <!-- Mensajes de alerta - Sticky en la parte superior -->
+            @if (successMessage) {
+            <div class="alert alert-success alert-sticky">{{ successMessage }}</div>
+            }
+
+            @if (error) {
+            <div class="alert alert-danger alert-sticky">{{ error }}</div>
+            }
+
             <!-- Body -->
-            <div class="modal-body">
+            <div class="modal-body" #modalBody>
                 <form [formGroup]="form" (ngSubmit)="submit()" novalidate>
                     <!-- Row 1: first name - last name -->
                     <div class="row">

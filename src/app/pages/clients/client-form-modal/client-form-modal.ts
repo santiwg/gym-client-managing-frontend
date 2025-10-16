@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Output, Input, OnInit, ViewChild, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { FormsModule } from '@angular/forms';
 
@@ -9,14 +9,18 @@ import { FormsModule } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, ReactiveFormsModule]
 })
-export class ClientFormModal implements OnInit {
+export class ClientFormModal implements OnInit, OnChanges {
   @Input() isEdit: boolean = false;
   @Input() genders: any[] = [];
   @Input() bloodTypes: any[] = [];
   @Input() clientGoals: any[] = [];
   @Input() initialClient: any = null;
+  @Input() successMessage: string | null = null;
+  @Input() error: string | null = null;
   @Output() close = new EventEmitter<void>();
   @Output() save = new EventEmitter<any>();
+
+  @ViewChild('modalBody') modalBody!: ElementRef;
 
   form: FormGroup;
   clientObservations: any[] = [];
@@ -72,6 +76,12 @@ export class ClientFormModal implements OnInit {
   ngOnInit() {
     if (this.initialClient) {
       this.populateForm();
+    }
+  }
+
+  ngOnChanges(changes: SimpleChanges) {
+    if ((changes['successMessage'] && this.successMessage) || (changes['error'] && this.error)) {
+      setTimeout(() => this.modalBody?.nativeElement?.scrollTo({ top: 0, behavior: 'smooth' }), 0);
     }
   }
 

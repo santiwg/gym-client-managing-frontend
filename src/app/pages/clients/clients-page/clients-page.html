@@ -101,8 +101,8 @@
 
     @if (showClientFormModal) {
     <app-client-form-modal [isEdit]="isEditClient" [genders]="genders" [bloodTypes]="bloodTypes"
-        [clientGoals]="clientGoals" [initialClient]="clientFormInitialData" (close)="closeClientFormModal()"
-        (save)="saveClient($event)">
+        [clientGoals]="clientGoals" [initialClient]="clientFormInitialData" [successMessage]="successMessage"
+        [error]="error" (close)="closeClientFormModal()" (save)="saveClient($event)">
     </app-client-form-modal>
     }
 </div>

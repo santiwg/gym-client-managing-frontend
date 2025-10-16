@@ -28,6 +28,7 @@ export class ClientsPage implements OnInit {
   // Estados de carga
   isLoading = false;
   error: string | null = null;
+  successMessage: string = '';
 
   // Propiedades de paginación (el backend maneja la cantidad por defecto = 10)
   currentPage = 1;
@@ -98,12 +99,16 @@ export class ClientsPage implements OnInit {
   openClientFormModal() {
     this.clientFormInitialData = null;
     this.isEditClient = false;
+    this.error = null;
+    this.successMessage = '';
     this.showClientFormModal = true;
   }
 
   editClient(client: any) {
     this.clientFormInitialData = this.prepareClientForEdit(client);
     this.isEditClient = true;
+    this.error = null;
+    this.successMessage = '';
     this.showClientFormModal = true;
   }
 
@@ -136,17 +141,25 @@ export class ClientsPage implements OnInit {
     try {
       this.isLoading = true;
       this.error = null;
+      this.successMessage = '';
 
       const clientRequest = this.buildClientRequest(clientData);
 
       if (this.isEditClient && this.clientFormInitialData) {
         await this.clientService.updateClient(this.clientFormInitialData.id, clientRequest).toPromise();
+        this.successMessage = 'Client updated successfully';
       } else {
         await this.clientService.createClient(clientRequest).toPromise();
+        this.successMessage = 'Client created successfully';
       }
 
-      this.resetModalState();
       this.loadClients();
+
+      // Cerrar el modal después de mostrar el mensaje durante 2 segundos
+      setTimeout(() => {
+        this.successMessage = '';
+        this.resetModalState();
+      }, 2000);
 
     } catch (error: any) {
       this.error = this.buildErrorMessage(error);
@@ -169,8 +182,8 @@ export class ClientsPage implements OnInit {
       email: clientData.email,
       phoneNumber: clientData.phoneNumber || undefined,
       address: clientData.address || undefined,
-      birthDate: clientData.birthDate,
-      ...(clientData.registrationDate && { registrationDate: clientData.registrationDate }),
+      birthDate: new Date(clientData.birthDate),
+      ...(clientData.registrationDate && { registrationDate: new Date(clientData.registrationDate) }),
       genderId: genderIdNum,
       bloodTypeId: bloodTypeIdNum,
       clientGoalId: clientData.clientGoalId && clientData.clientGoalId > 0 ? parseInt(clientData.clientGoalId, 10) : undefined,
@@ -183,7 +196,7 @@ export class ClientsPage implements OnInit {
       ? observations.map((obs: any) => ({
         summary: obs.title || obs.summary || '',
         comment: obs.description || obs.comment || '',
-        date: obs.date || undefined
+        date: obs.date ? new Date(obs.date) : undefined
       }))
       : [];
   }
